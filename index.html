@@ -60,9 +60,9 @@
     .hero-lead{margin:24px 0 0;color:var(--muted);font-size:18px;line-height:1.62;max-width:600px}
     .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
     .hero-note{margin-top:18px;color:#78869a;font-size:12px;max-width:540px}
-    .hero-art{position:relative;min-width:0}
+    .hero-art{position:relative;min-width:0;min-height:430px;display:flex;align-items:center;justify-content:center}
     .hero-art:before{content:"";position:absolute;inset:8% 5% 4%;border-radius:50%;background:radial-gradient(circle,rgba(90,84,232,.12),rgba(25,191,229,.04) 57%,transparent 72%);filter:blur(2px)}
-    .hero-art img{position:relative;width:100%;max-height:490px;object-fit:contain;filter:drop-shadow(0 28px 28px rgba(22,34,63,.10))}
+    .hero-art img{position:relative;width:min(100%,620px);max-height:470px;object-fit:contain;filter:drop-shadow(0 28px 28px rgba(22,34,63,.10))}
     .hero-caption{position:absolute;right:6%;bottom:2%;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:12px;padding:11px 14px;box-shadow:var(--shadow);font-size:12px;color:var(--muted)}
     .hero-caption strong{display:block;color:var(--ink);font-size:13px;margin-bottom:2px}
 
@@ -91,11 +91,14 @@
     .benefit b{display:block;margin-bottom:3px;font-size:15px}
     .benefit span{display:block;color:var(--muted);font-size:14px;line-height:1.5}
     .visual-card{min-height:440px;border-radius:26px;background:linear-gradient(145deg,#111a32,#212c57);color:#fff;position:relative;overflow:hidden;padding:30px;box-shadow:var(--shadow)}
-    .visual-card:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;right:-110px;top:-105px;background:radial-gradient(circle,rgba(25,191,229,.40),transparent 68%)}
-    .platform{position:absolute;left:11%;right:11%;bottom:62px;height:110px;border:2px solid #8394ff;border-radius:28px;background:rgba(255,255,255,.07);transform:perspective(700px) rotateX(58deg);box-shadow:0 34px 60px rgba(0,0,0,.25)}
-    .shell{position:absolute;left:19%;right:19%;height:130px;border:2px solid rgba(255,255,255,.42);border-radius:34px;background:rgba(255,255,255,.04);transform:perspective(700px) rotateX(58deg)}
-    .shell.s1{bottom:148px}.shell.s2{bottom:230px;border-color:#31c5e7}.shell.s3{bottom:312px;border-color:#887fff}
-    .visual-label{position:absolute;left:30px;bottom:27px;color:#cad4ef;font-size:12px}
+    .visual-card:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;right:-110px;top:-105px;background:radial-gradient(circle,rgba(25,191,229,.40),transparent 68%);pointer-events:none}
+    .module-demo{position:relative;z-index:1;margin-top:28px;display:grid;gap:12px}
+    .module-layer{height:58px;border:1.5px solid rgba(255,255,255,.35);border-radius:18px;background:rgba(255,255,255,.045);display:flex;align-items:center;padding:0 18px;color:#d9e1f5;font-size:12px;font-weight:800;letter-spacing:.04em}
+    .module-layer:nth-child(1){margin-inline:12%;border-color:#887fff}
+    .module-layer:nth-child(2){margin-inline:8%;border-color:#31c5e7}
+    .module-layer:nth-child(3){margin-inline:4%}
+    .module-base{height:78px;margin-top:8px;border:1.5px solid #8394ff;border-radius:22px;background:linear-gradient(90deg,rgba(108,99,255,.18),rgba(25,191,229,.10));display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:900}
+    .visual-label{position:relative;z-index:1;margin-top:20px;color:#cad4ef;font-size:12px}
 
     /* What is inside */
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -168,19 +171,19 @@
       <a href="#how">Как это работает</a>
       <a href="#advantages">Возможности</a>
       <a href="#audience">Для кого</a>
-      <a href="#project">О проекте</a>
+      <a href="#company">О компании</a>
       <a class="btn" href="#request">Оставить заявку</a>
     </nav>
     <button class="mobile-btn" id="mobileBtn" type="button" aria-label="Открыть меню">☰</button>
   </div>
 </header>
 
-<div class="support-band" aria-label="Информация о поддержке проекта">
+<div class="support-band" aria-label="Информация о поддержке">
   <div class="wrap support-inner">
-    <div class="support-logo"><img src="assets/fasie.svg" alt="Фонд содействия инновациям"></div>
+    <div class="support-logo"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI4LjIuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9Il/QodC70L7QuV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiCgkgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTUyLjUgNzQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDE1Mi41IDc0OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzFCMzk2ODt9Cgkuc3Qxe2ZpbGw6I0ZGRkZGRjt9Cgkuc3Qye2ZpbGw6I0UyMkEyQTt9Cgkuc3Qze2ZpbGw6IzMzOUZEOTt9Cgkuc3Q0e2ZpbGw6I0UxRjFGOTt9Cjwvc3R5bGU+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMy4yLDEyLjNjMCwwLjUtMC4xLDEtMC4zLDEuNHMtMC40LDAuNy0wLjgsMWMtMC4zLDAuMy0wLjcsMC41LTEuMSwwLjZjLTAuNCwwLjEtMC44LDAuMi0xLjIsMC4zdjFoLTJ2LTFsMCwwCgljLTAuNi0wLjEtMS4xLTAuMi0xLjUtMC40cy0wLjgtMC40LTEtMC44Yy0wLjMtMC4zLTAuNS0wLjctMC42LTEuMWMtMC4xLTAuNC0wLjItMC45LTAuMi0xLjRWNy43YzAtMC41LDAuMS0xLDAuMy0xLjQKCWMwLjItMC40LDAuNC0wLjcsMC44LTFDNS45LDUsNi4zLDQuOCw2LjcsNC43YzAuNC0wLjEsMC44LTAuMiwxLjItMC4yVjMuOGgydjAuN2MwLjQsMCwwLjgsMC4xLDEuMiwwLjJjMC40LDAuMiwwLjcsMC40LDEuMSwwLjYKCWMwLjMsMC4zLDAuNiwwLjYsMC43LDFjMC4yLDAuNCwwLjMsMC45LDAuMywxLjRWMTIuMyBNNy45LDZDNy41LDYuMSw3LjEsNi4zLDYuOCw2LjVDNi42LDYuNyw2LjUsNy4xLDYuNSw3LjZ2NC45CgljMCwwLjIsMCwwLjQsMC4xLDAuNmMwLjEsMC4yLDAuMiwwLjMsMC4zLDAuNGMwLjEsMC4xLDAuMywwLjIsMC41LDAuM3MwLjQsMC4xLDAuNSwwLjFWNkw3LjksNnogTTExLjQsNy42YzAtMC41LTAuMS0wLjgtMC40LTEuMQoJYy0wLjMtMC4zLTAuNi0wLjQtMS0wLjRWMTRjMC4yLDAsMC4zLTAuMSwwLjUtMC4xYzAuMi0wLjEsMC4zLTAuMiwwLjUtMC4zYzAuMS0wLjEsMC4zLTAuMywwLjMtMC40YzAuMS0wLjIsMC4xLTAuNCwwLjEtMC42CglMMTEuNCw3LjZMMTEuNCw3LjZ6Ii8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yMy4yLDEzLjNjMCwxLjEtMC4zLDEuOS0wLjgsMi41Yy0wLjUsMC42LTEuMywwLjgtMi40LDAuOHMtMS45LTAuMy0yLjQtMC44Yy0wLjUtMC41LTAuNy0xLjMtMC43LTIuNFY3LjEKCWMwLTAuNSwwLjEtMSwwLjItMS40czAuMy0wLjgsMC41LTEuMWMwLjMtMC4zLDAuNi0wLjUsMS0wLjdDMTksMy44LDE5LjQsMy43LDIwLDMuN3MxLjEsMC4xLDEuNSwwLjJjMC40LDAuMiwwLjcsMC40LDEsMC43CgljMC4yLDAuMywwLjQsMC43LDAuNSwxLjFzMC4yLDAuOSwwLjIsMS40VjEzLjMgTTIxLjEsNi45YzAtMC40LTAuMS0wLjctMC4yLTFjLTAuMi0wLjMtMC40LTAuNC0wLjktMC40Yy0wLjIsMC0wLjQsMC0wLjYsMC4yCgljLTAuMSwwLjEtMC4zLDAuMi0wLjQsMC40cy0wLjEsMC4zLTAuMiwwLjVjMCwwLjIsMCwwLjQsMCwwLjV2Ni40YzAsMC4zLDAuMSwwLjYsMC4zLDAuOWMwLjIsMC4zLDAuNSwwLjQsMC45LDAuNHMwLjctMC4xLDAuOS0wLjQKCWMwLjItMC4zLDAuMy0wLjYsMC4zLTFMMjEuMSw2LjlMMjEuMSw2Ljl6Ii8+Cjxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9IjMxLjMsMTYuNiAzMS4zLDExIDI5LDExIDI5LDE2LjYgMjcsMTYuNiAyNywzLjggMjksMy44IDI5LDkuMSAzMS4zLDkuMSAzMS4zLDMuOCAzMy4zLDMuOCAzMy4zLDE2LjYgCgkzMS4zLDE2LjYgIi8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zOCwxNi42VjE5aC0xLjd2LTQuMWwwLjgtMC4yYzAuNC0wLjQsMC42LTAuOCwwLjctMS4zYzAuMS0wLjUsMC4yLTEuMSwwLjItMS45bDAuMi03LjdINDR2MTAuOWgwLjhWMTloLTEuNwoJdi0yLjRIMzggTTM5LjksMTEuNWMwLDAuNy0wLjEsMS40LTAuMSwxLjljLTAuMSwwLjUtMC4yLDEtMC40LDEuM2gyLjh2LTlINDBMMzkuOSwxMS41eiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTcsMy43YzAuNSwwLDEsMC4xLDEuNCwwLjJjMC40LDAuMSwwLjcsMC40LDEsMC42YzAuMywwLjMsMC40LDAuNiwwLjYsMC45YzAsMC40LDAsMC44LDAsMS4ybC0yLDAuNQoJYzAtMC41LTAuMS0wLjgtMC4zLTEuMWMtMC4yLTAuMy0wLjUtMC40LTAuOS0wLjRjLTAuMiwwLTAuNCwwLTAuNiwwLjFjLTAuMSwwLjEtMC4zLDAuMi0wLjMsMC40Yy0wLjEsMC4yLTAuMSwwLjMtMC4yLDAuNQoJYzAsMC4yLDAsMC40LDAsMC41djYuNWMwLDAuMSwwLDAuMywwLDAuNGMwLDAuMiwwLjEsMC4zLDAuMiwwLjRjMC4xLDAuMSwwLjIsMC4yLDAuMywwLjNzMC4zLDAuMSwwLjUsMC4xYzAuNywwLDEuMS0wLjUsMS4xLTEuNgoJYzAuMywwLjEsMC43LDAuMSwxLDAuMnMwLjcsMC4xLDEsMC4xYzAsMS0wLjMsMS43LTAuOCwyLjNjLTAuNSwwLjYtMS4zLDAuOC0yLjMsMC44Yy0xLjEsMC0xLjktMC4zLTIuNC0wLjgKCWMtMC41LTAuNS0wLjgtMS4zLTAuOC0yLjNWNy4yYzAtMC41LDAtMC45LDAuMi0xLjRDNTMuOCw1LjQsNTQsNSw1NC4yLDQuN2MwLjMtMC4zLDAuNi0wLjYsMS0wLjdDNTUuOSwzLjgsNTYuNCwzLjcsNTcsMy43Ii8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02OS42LDEzLjNjMCwxLjEtMC4zLDEuOS0wLjgsMi41Yy0wLjUsMC42LTEuMywwLjgtMi40LDAuOHMtMS45LTAuMy0yLjQtMC44Yy0wLjUtMC41LTAuNy0xLjMtMC43LTIuNFY3LjEKCWMwLTAuNSwwLjEtMSwwLjItMS40YzAuMS0wLjQsMC4zLTAuOCwwLjUtMS4xYzAuMi0wLjMsMC42LTAuNSwxLTAuN3MwLjktMC4zLDEuNC0wLjNjMC42LDAsMS4xLDAuMSwxLjUsMC4yYzAuNCwwLjIsMC43LDAuNCwxLDAuNwoJYzAuMiwwLjMsMC40LDAuNywwLjUsMS4xczAuMiwwLjksMC4yLDEuNEw2OS42LDEzLjMgTTY3LjYsNi45YzAtMC40LTAuMS0wLjctMC4yLTFjLTAuMi0wLjMtMC40LTAuNC0wLjktMC40Yy0wLjIsMC0wLjQsMC0wLjYsMC4yCgljLTAuMSwwLjEtMC4zLDAuMi0wLjQsMC40cy0wLjEsMC4zLTAuMiwwLjVjMCwwLjIsMCwwLjQsMCwwLjV2Ni40YzAsMC4zLDAuMSwwLjYsMC4zLDAuOWMwLjIsMC4zLDAuNSwwLjQsMC45LDAuNHMwLjctMC4xLDAuOS0wLjQKCWMwLjItMC4zLDAuMy0wLjYsMC4zLTFMNjcuNiw2LjlMNjcuNiw2Ljl6Ii8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik03NC4zLDE2LjZWMTloLTEuN3YtNC4xbDAuOC0wLjJjMC40LTAuNCwwLjYtMC44LDAuNy0xLjNzMC4yLTEuMSwwLjItMS45bDAuMi03LjdoNS44djEwLjloMC44VjE5aC0xLjd2LTIuNAoJSDc0LjMgTTc2LjEsMTEuNWMwLDAuNy0wLjEsMS40LTAuMSwxLjljLTAuMSwwLjUtMC4yLDEtMC40LDEuM2gyLjh2LTloLTIuMUw3Ni4xLDExLjV6Ii8+Cjxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9Ijg0LjQsMTYuNiA4NC40LDMuOCA5MC4yLDMuOCA5MC4yLDUuNiA4Ni40LDUuNiA4Ni40LDkuMSA4OS43LDkuMSA4OS43LDExIDg2LjQsMTEgODYuNCwxNC43IAoJOTAuMiwxNC43IDkwLjIsMTYuNiA4NC40LDE2LjYgIi8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw4LjZsLTIuNyw4aC0xLjlWMy44aDJ2OC4xaDAuMWwyLjctOC4xaDJ2MTIuN2gtMkw5OCw4LjZMOTgsOC42IE05NS42LDAuOWMwLDAuMSwwLDAuMywwLjEsMC40CgljMC4xLDAuMSwwLjIsMC4zLDAuMywwLjRjMC4xLDAuMSwwLjIsMC4yLDAuNCwwLjNjMC4xLDAuMSwwLjMsMC4xLDAuNSwwLjFzMC40LDAsMC41LTAuMXMwLjMtMC4yLDAuNC0wLjNTOTgsMS41LDk4LDEuMwoJczAtMC4zLDAtMC40aDEuNWMwLDAuMi0wLjEsMC41LTAuMiwwLjhDOTkuMiwyLDk5LDIuMyw5OC44LDIuNkM5OC42LDIuOCw5OC4zLDMsOTgsMy4ycy0wLjcsMC4yLTEuMSwwLjJjLTAuNSwwLTAuOS0wLjEtMS4yLTAuMgoJQzk1LjMsMyw5NSwyLjgsOTQuOCwyLjZzLTAuNC0wLjUtMC41LTAuOFM5NC4xLDEuMiw5NC4xLDFMOTUuNiwwLjlMOTUuNiwwLjl6Ii8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMDYuOSwzLjdjMC41LDAsMSwwLjEsMS40LDAuMmMwLjQsMC4xLDAuNywwLjQsMSwwLjZjMC4zLDAuMywwLjQsMC42LDAuNiwwLjljMC4xLDAuNCwwLjIsMC43LDAuMiwxLjJsLTIsMC41CgljMC0wLjUtMC4xLTAuOC0wLjMtMS4xYy0wLjItMC4zLTAuNS0wLjQtMC45LTAuNGMtMC4yLDAtMC40LDAtMC42LDAuMWMtMC4xLDAuMS0wLjMsMC4yLTAuMywwLjRjLTAuMSwwLjItMC4xLDAuMy0wLjIsMC41CgljMCwwLjIsMCwwLjQsMCwwLjV2Ni41YzAsMC4xLDAsMC4zLDAsMC40YzAsMC4yLDAuMSwwLjMsMC4yLDAuNGMwLjEsMC4xLDAuMiwwLjIsMC4zLDAuM2MwLjEsMC4xLDAuMywwLjEsMC41LDAuMQoJYzAuNywwLDEuMS0wLjUsMS4xLTEuNmMwLjMsMC4xLDAuNywwLjEsMSwwLjJzMC43LDAuMSwxLDAuMWMwLDEtMC4zLDEuNy0wLjgsMi4zYy0wLjUsMC42LTEuMywwLjgtMi4zLDAuOGMtMS4xLDAtMS44LTAuMy0yLjQtMC44CglzLTAuOC0xLjMtMC44LTIuM1Y3LjJjMC0wLjUsMC0wLjksMC4yLTEuNGMwLjEtMC40LDAuMy0wLjgsMC41LTEuMWMwLjMtMC4zLDAuNi0wLjYsMS0wLjdDMTA1LjgsMy44LDEwNi4zLDMuNywxMDYuOSwzLjciLz4KPHBvbHlsaW5lIGNsYXNzPSJzdDAiIHBvaW50cz0iMTE2LjYsNS42IDExNi42LDE2LjYgMTE0LjYsMTYuNiAxMTQuNiw1LjYgMTEyLjUsNS42IDExMi41LDMuOCAxMTguNywzLjggMTE4LjcsNS42IDExNi42LDUuNiAiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyNi40LDkuOWMwLjYsMC4yLDEsMC41LDEuMiwxczAuMywxLjEsMC4zLDEuOGMwLDEuMy0wLjMsMi4zLTAuOSwyLjlzLTEuNSwwLjktMi43LDAuOWgtMi43VjMuOGgyLjgKCWMxLjEsMCwyLDAuMywyLjUsMC45czAuOCwxLjUsMC44LDIuNmMwLDAuNi0wLjEsMS4xLTAuMywxLjVDMTI3LjMsOS4yLDEyNi45LDkuNiwxMjYuNCw5LjlMMTI2LjQsOS45IE0xMjUuOSw3LjMKCWMwLTAuNi0wLjEtMS0wLjQtMS4zYy0wLjItMC4zLTAuNi0wLjQtMS4yLTAuNGgtMC42djMuM2gwLjdjMC41LDAsMC45LTAuMSwxLjEtMC40QzEyNS43LDguMiwxMjUuOSw3LjgsMTI1LjksNy4zIE0xMjYsMTIuNQoJYzAtMC42LTAuMS0xLTAuMy0xLjNzLTAuNi0wLjQtMS4yLTAuNGgtMC44djRoMC44YzAuMywwLDAuNi0wLjEsMC44LTAuMmMwLjItMC4xLDAuMy0wLjMsMC40LTAuNXMwLjItMC40LDAuMi0wLjcKCUMxMjYsMTMuMSwxMjYsMTIuOCwxMjYsMTIuNSIvPgo8cG9seWxpbmUgY2xhc3M9InN0MCIgcG9pbnRzPSIxMzYuMiw4LjYgMTMzLjUsMTYuNiAxMzEuNiwxNi42IDEzMS42LDMuOCAxMzMuNSwzLjggMTMzLjUsMTEuOSAxMzMuNiwxMS45IDEzNi4zLDMuOCAxMzguMywzLjggCgkxMzguMywxNi42IDEzNi4zLDE2LjYgMTM2LjMsOC42IDEzNi4yLDguNiAiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTE0MS42LDE2LjZsMC43LTRjMC4xLTAuNCwwLjItMC44LDAuNC0xLjJzMC40LTAuNiwwLjgtMC44Yy0wLjYtMC4yLTEtMC42LTEuMi0xLjFTMTQyLDguNCwxNDIsNy43CgljMC0xLjMsMC4zLTIuMiwwLjktMi45YzAuNi0wLjYsMS41LTEsMi41LTFoM3YxMi43aC0ydi01LjRoLTAuNWMtMC40LDAtMC43LDAuMS0xLDAuNGMtMC4zLDAuMy0wLjUsMC43LTAuNiwxLjVsLTAuNiwzLjZIMTQxLjYKCSBNMTQ1LjYsNS42Yy0wLjYsMC0xLDAuMi0xLjMsMC41cy0wLjQsMC44LTAuNCwxLjRzMC4yLDEuMSwwLjUsMS4zczAuNywwLjQsMS4yLDAuNGgwLjhWNS42SDE0NS42TDE0NS42LDUuNnoiLz4KPHBvbHlsaW5lIGNsYXNzPSJzdDAiIHBvaW50cz0iMTAuNiwyNy4yIDcuMiwzNy4xIDQuOSwzNy4xIDQuOSwyMS4zIDcuMywyMS4zIDcuMywzMS4zIDcuNCwzMS4zIDEwLjcsMjEuMyAxMy4xLDIxLjMgMTMuMSwzNy4xIAoJMTAuNywzNy4xIDEwLjcsMjcuMiAxMC42LDI3LjIgIi8+Cjxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9IjI1LjMsMzcuMSAyNS4zLDMwLjIgMjIuNSwzMC4yIDIyLjUsMzcuMSAyMCwzNy4xIDIwLDIxLjMgMjIuNSwyMS4zIDIyLjUsMjcuOSAyNS4zLDI3LjkgMjUuMywyMS4zIAoJMjcuOCwyMS4zIDI3LjgsMzcuMSAyNS4zLDM3LjEgIi8+Cjxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9IjQwLjEsMzcuMSA0MC4xLDMwLjIgMzcuMiwzMC4yIDM3LjIsMzcuMSAzNC44LDM3LjEgMzQuOCwyMS4zIDM3LjIsMjEuMyAzNy4yLDI3LjkgNDAuMSwyNy45IAoJNDAuMSwyMS4zIDQyLjYsMjEuMyA0Mi42LDM3LjEgNDAuMSwzNy4xICIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTcuMiwzM2MwLDEuNC0wLjMsMi40LTAuOSwzLjFjLTAuNiwwLjctMS42LDEuMS0zLDEuMXMtMi4zLTAuMy0yLjktMWMtMC42LTAuNy0wLjktMS42LTAuOS0yLjl2LTgKCWMwLTAuNiwwLjEtMS4yLDAuMi0xLjdjMC4xLTAuNSwwLjQtMSwwLjctMS4zYzAuMy0wLjQsMC43LTAuNywxLjItMC44YzAuNS0wLjIsMS4xLTAuMywxLjgtMC4zczEuNCwwLjEsMS44LDAuMwoJYzAuNSwwLjIsMC45LDAuNSwxLjIsMC44YzAuMywwLjQsMC41LDAuOCwwLjcsMS4zYzAuMSwwLjUsMC4yLDEuMSwwLjIsMS44TDU3LjIsMzMgTTU0LjcsMjUuMWMwLTAuNC0wLjEtMC44LTAuMy0xLjIKCWMtMC4yLTAuNC0wLjYtMC41LTEuMS0wLjVjLTAuMywwLTAuNSwwLjEtMC43LDAuMnMtMC4zLDAuMy0wLjQsMC41Yy0wLjEsMC4yLTAuMiwwLjQtMC4yLDAuNnMtMC4xLDAuNC0wLjEsMC43djgKCWMwLDAuNCwwLjEsMC44LDAuMywxLjFzMC42LDAuNSwxLjEsMC41czAuOS0wLjIsMS4xLTAuNWMwLjItMC40LDAuMy0wLjgsMC4zLTEuMkw1NC43LDI1LjFMNTQuNywyNS4xeiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNjkuOCwyOC44YzAuNywwLjIsMS4yLDAuNywxLjUsMS4zYzAuMywwLjYsMC40LDEuNCwwLjQsMi4yYzAsMS43LTAuNCwyLjktMS4xLDMuNmMtMC43LDAuOC0xLjgsMS4yLTMuMywxLjIKCUg2NFYyMS4yaDMuNWMxLjQsMCwyLjQsMC40LDMuMSwxLjFzMSwxLjgsMSwzLjJjMCwwLjctMC4xLDEuNC0wLjQsMS45cy0wLjcsMS0xLjMsMS4yTDY5LjgsMjguOCBNNjkuMSwyNS42YzAtMC43LTAuMS0xLjMtMC40LTEuNgoJYy0wLjMtMC4zLTAuOC0wLjUtMS41LTAuNWgtMC44djQuMWgwLjhjMC43LDAsMS4xLTAuMiwxLjQtMC41QzY5LDI2LjcsNjkuMSwyNi4yLDY5LjEsMjUuNiBNNjkuMywzMi4xYzAtMC43LTAuMS0xLjMtMC40LTEuNwoJYy0wLjMtMC40LTAuOC0wLjUtMS41LTAuNWgtMC45djQuOWgxYzAuNCwwLDAuNy0wLjEsMS0wLjJjMC4yLTAuMSwwLjQtMC40LDAuNi0wLjZjMC4xLTAuMiwwLjItMC41LDAuMy0wLjgKCUM2OS4zLDMyLjgsNjkuMywzMi40LDY5LjMsMzIuMSIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNODQuMiwzNy4xbC0wLjYtMy4zaC0yLjljLTAuMSwwLjUtMC4yLDEuMS0wLjMsMS42Yy0wLjEsMC42LTAuMiwxLjEtMC4zLDEuN2gtMi41YzAuNS0yLjcsMS4xLTUuMywxLjYtNy45CglzMS4xLTUuMywxLjYtNy45aDIuOGwzLjMsMTUuOEg4NC4yIE04MiwyNC45Yy0wLjIsMS4xLTAuMywyLjItMC41LDMuM2MtMC4yLDEuMS0wLjQsMi4yLTAuNiwzLjNoMi4yTDgyLDI0LjkKCUM4Mi4xLDI0LjksODIsMjQuOSw4MiwyNC45eiIvPgo8cG9seWxpbmUgY2xhc3M9InN0MCIgcG9pbnRzPSIxMDAuNSwyMS4zIDEwMC41LDM0LjggMTAxLjUsMzQuOCAxMDEuNSw0MC4xIDk5LjQsNDAuMSA5OS40LDM3LjEgOTIuNywzNy4xIDkyLjcsMjEuMyA5NS4yLDIxLjMgCgk5NS4yLDM0LjggOTgsMzQuOCA5OCwyMS4zIDEwMC41LDIxLjMgIi8+Cjxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9IjExMy4yLDI3LjIgMTA5LjksMzcuMSAxMDcuNCwzNy4xIDEwNy40LDIxLjMgMTA5LjksMjEuMyAxMDkuOSwzMS4zIDExMCwzMS4zIDExMy4zLDIxLjMgMTE1LjcsMjEuMyAKCTExNS43LDM3LjEgMTEzLjMsMzcuMSAxMTMuMywyNy4yIDExMy4yLDI3LjIgIi8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMjIsMzcuMWwwLjktNWMwLjEtMC41LDAuMy0xLDAuNS0xLjVjMC4yLTAuNCwwLjYtMC44LDEtMWMtMC43LTAuMy0xLjItMC44LTEuNS0xLjRzLTAuNC0xLjQtMC40LTIuMgoJYzAtMS42LDAuNC0yLjcsMS4xLTMuNmMwLjgtMC44LDEuOC0xLjIsMy4xLTEuMmgzLjdWMzdoLTIuNXYtNi44aC0wLjdjLTAuNCwwLTAuOCwwLjItMS4yLDAuNWMtMC40LDAuMy0wLjYsMC45LTAuOCwxLjhsLTAuOCw0LjUKCUwxMjIsMzcuMSBNMTI2LjksMjMuNmMtMC43LDAtMS4zLDAuMi0xLjYsMC43Yy0wLjMsMC40LTAuNCwxLTAuNCwxLjhzMC4yLDEuMywwLjYsMS42YzAuNCwwLjMsMC45LDAuNCwxLjUsMC40aDF2LTQuNQoJQzEyNy45LDIzLjYsMTI2LjksMjMuNiwxMjYuOSwyMy42eiIvPgo8cG9seWxpbmUgY2xhc3M9InN0MCIgcG9pbnRzPSIxNDEuOSwzMy42IDE0MC44LDMwLjcgMTM5LjgsMjcuOSAxMzkuNywyNy45IDEzOS43LDM3LjEgMTM3LjIsMzcuMSAxMzcuMiwyMS4zIDEzOS42LDIxLjMgCgkxNDEuMywyNS44IDE0Mi42LDI5LjIgMTQyLjcsMjkuMiAxNDQsMjUuNyAxNDUuNywyMS4zIDE0OC4xLDIxLjMgMTQ4LjEsMzcuMSAxNDUuNiwzNy4xIDE0NS42LDI4IDE0NS42LDI4IDE0NC41LDMwLjggMTQzLjQsMzMuNiAKCTE0MS45LDMzLjYgIi8+CjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0xNDYuNyw0NS4xYzAuNS0wLjMsMS0wLjcsMS41LTFoMC4xbDAsMGwwLDBjLTIuOCwxLjMtNS42LDIuNC04LjMsMy41Yy0xNy4yLDYuNy0zMy4zLDkuNS00Ny40LDkuNgoJQzcyLjgsNTcuMyw1Ny4yLDUyLDQ4LjksNDRoLTE1QzU2LjQsNjUuMywxMDguOSw3MC4yLDE0Ni43LDQ1LjEiLz4KPHBhdGggY2xhc3M9InN0MiIgZD0iTTE5LjEsNDRINC45YzE5LDIwLjEsNDYuMiwyNy43LDY5LDI4LjdjMi40LDAuMSw0LjcsMC4xLDYuOSwwLjFjMTQuOC0wLjIsMzEuMy0zLjQsNDUuNi0xMS4xCgljOC4yLTQuNCwxNS43LTEwLjIsMjEuOC0xNy44bDAsMEMxMTMuNiw3Ny45LDQ0LjMsNzIsMTkuMSw0NCIvPgo8cGF0aCBjbGFzcz0ic3QzIiBkPSJNMTQ4LjIsNDRMMTQ4LjIsNDRMMTQ4LjIsNDRMMTQ4LjIsNDRjLTAuNiwwLjQtMS4xLDAuOC0xLjYsMS4xQzEwOC45LDcwLjIsNTYuNCw2NS4zLDMzLjksNDRIMTkuMQoJQzQ0LjMsNzIsMTEzLjYsNzcuOSwxNDguMiw0NEwxNDguMiw0NCIvPgo8cGF0aCBjbGFzcz0ic3Q0IiBkPSJNMTQ4LjYsNDMuOUwxNDguNiw0My45YzAtMC4xLTAuMS0wLjItMC4yLTAuMmMwLDAtMC4xLTAuMS0wLjItMC4xaC0wLjFIMTQ4aC0wLjFjLTIuOCwxLjItNS41LDIuNC04LjMsMy41CgljLTE1LjksNi4xLTMyLjIsOS40LTQ3LjIsOS41aC0wLjhjLTE4LjQsMC0zMy44LTQuNy00Mi4zLTEyLjlsLTAuMS0wLjFsLTAuMS0wLjFINDlINWMwLDAtMC4xLDAtMC4yLDAuMWwtMC4yLDAuMQoJYy0wLjEsMC4xLTAuMiwwLjItMC4xLDAuM3YwLjJjMCwwLDAsMC4xLDAuMSwwLjJjOC44LDkuMywyMCwxNi41LDMzLjIsMjEuNWMxMSw0LjIsMjMuNSw2LjYsMzYsNy4yYzEuNywwLjEsMy41LDAuMSw1LjMsMC4xCgljMC42LDAsMS4xLDAsMS43LDBjNy44LTAuMSwxNS42LTEsMjMuMS0yLjhjOC4yLTEuOSwxNS44LTQuNywyMi43LTguM2M4LjgtNC43LDE2LjEtMTAuNiwyMS45LTE3LjhsMCwwbDAsMHYtMC4xdi0wLjFWNDQKCUMxNDguNiw0NC4xLDE0OC42LDQ0LDE0OC42LDQzLjlMMTQ4LjYsNDMuOXogTTE0Nyw0NC45Yy01LjYsNi42LTEyLjYsMTIuMi0yMC44LDE2LjVjLTEyLjksNi44LTI5LDEwLjctNDUuNCwxMQoJYy0yLjMsMC00LjYsMC02LjktMC4xQzU3LjgsNzEuNiwyNy42LDY3LDUuNyw0NC40aDQzLjFjOC43LDguMywyNC4zLDEzLDQyLjgsMTNjMC4zLDAsMC41LDAsMC44LDBjMTUuMS0wLjEsMzEuNS0zLjQsNDcuNC05LjYKCUMxNDIuMyw0NywxNDQuNyw0NiwxNDcsNDQuOUwxNDcsNDQuOXoiLz4KPC9zdmc+Cg==" alt="Фонд содействия инновациям"></div>
     <div class="support-logo platform">
       <img src="https://univertechpred.ru/local/templates/mo/assets/img/master/main_project-logo.svg" alt="Платформа университетского технологического предпринимательства" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <span class="platform-fallback">Платформа университетского технологического предпринимательства</span>
+      <span class="platform-fallback"><strong>ПЛАТФОРМА</strong><br>университетского<br>технологического<br>предпринимательства</span>
     </div>
     <div class="support-divider" aria-hidden="true"></div>
     <p class="support-text">Проект реализован при поддержке Фонда содействия инновациям в рамках программы «Студенческий стартап» Платформы университетского технологического предпринимательства федерального проекта «Технологии», входящего в состав национального проекта «Эффективная и конкурентная экономика».</p>
@@ -198,10 +201,10 @@
           <a class="btn" href="#request">Оставить заявку</a>
           <a class="btn secondary" href="#how">Как это работает</a>
         </div>
-        <p class="hero-note">Продукт разрабатывается для домашнего использования, а также для кружков, школ и технопарков.</p>
+        <p class="hero-note">РОБКОН создаёт персональные роботы-конструкторы для дома, подарка, кружков, школ и технопарков.</p>
       </div>
       <div class="hero-art">
-        <img src="assets/robocon-hero.svg" alt="Концепт подвижного робота-конструктора РОБКОН">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTAwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDkwMCA3MjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImcxIiB4MT0iMTUwIiB5MT0iMTAwIiB4Mj0iNzYwIiB5Mj0iNjUwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiM2QzYzRkYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTdDNkZGIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnMiIgeDE9IjMyMCIgeTE9IjIxMCIgeDI9IjY1MCIgeTI9IjU0MCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjRkZGRkZGIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0U5RURGRiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxmaWx0ZXIgaWQ9InNoYWRvdyIgeD0iLTMwJSIgeT0iLTMwJSIgd2lkdGg9IjE2MCUiIGhlaWdodD0iMTYwJSI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSIyNCIgc3RkRGV2aWF0aW9uPSIyOCIgZmxvb2QtY29sb3I9IiMxMTE4M0MiIGZsb29kLW9wYWNpdHk9IjAuMTgiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8Y2lyY2xlIGN4PSI0NTQiIGN5PSIzNjAiIHI9IjI4NiIgZmlsbD0iI0Y0RjZGRiIvPgogIDxwYXRoIGQ9Ik0xODAgMTkwTDI1NCAxNDZMMzI5IDE5MEwyNTQgMjM0TDE4MCAxOTBaIiBmaWxsPSIjRERFM0ZGIi8+CiAgPHBhdGggZD0iTTE4MCAxOTBWMjc2TDI1NCAzMjBWMjM0TDE4MCAxOTBaIiBmaWxsPSIjQzlEMkZGIi8+CiAgPHBhdGggZD0iTTMyOSAxOTBWMjc2TDI1NCAzMjBWMjM0TDMyOSAxOTBaIiBmaWxsPSIjQjlDNkZGIi8+CiAgPHBhdGggZD0iTTY1MCAxNTBMNzA2IDExN0w3NjIgMTUwTDcwNiAxODNMNjUwIDE1MFoiIGZpbGw9IiNEREY4RkYiLz4KICA8cGF0aCBkPSJNNjUwIDE1MFYyMTVMNzA2IDI0OFYxODNMNjUwIDE1MFoiIGZpbGw9IiNDNkYxRkYiLz4KICA8cGF0aCBkPSJNNzYyIDE1MFYyMTVMNzA2IDI0OFYxODNMNzYyIDE1MFoiIGZpbGw9IiNBRUVBRkYiLz4KICA8cGF0aCBkPSJNMTE4IDQ5NEwxNjAgNDY5TDIwMiA0OTRMMTYwIDUxOUwxMTggNDk0WiIgZmlsbD0iI0ZGRjBDOCIvPgogIDxwYXRoIGQ9Ik0xMTggNDk0VjU0M0wxNjAgNTY4VjUxOUwxMTggNDk0WiIgZmlsbD0iI0ZGRTM5QSIvPgogIDxwYXRoIGQ9Ik0yMDIgNDk0VjU0M0wxNjAgNTY4VjUxOUwyMDIgNDk0WiIgZmlsbD0iI0ZGRDk3MCIvPgogIDxnIGZpbHRlcj0idXJsKCNzaGFkb3cpIj4KICAgIDxyZWN0IHg9IjI0OCIgeT0iMjUwIiB3aWR0aD0iNDA0IiBoZWlnaHQ9IjI4MCIgcng9IjY4IiBmaWxsPSJ1cmwoI2cyKSIvPgogICAgPHJlY3QgeD0iMjg5IiB5PSIyOTQiIHdpZHRoPSIzMjIiIGhlaWdodD0iMTU0IiByeD0iNDIiIGZpbGw9IiMxMTE4M0MiLz4KICAgIDxjaXJjbGUgY3g9IjM4MiIgY3k9IjM2OCIgcj0iMjciIGZpbGw9IiMxN0M2RkYiLz4KICAgIDxjaXJjbGUgY3g9IjUxOSIgY3k9IjM2OCIgcj0iMjciIGZpbGw9IiM2QzYzRkYiLz4KICAgIDxwYXRoIGQ9Ik0zOTggNDE2QzQzMiA0NDIgNDY5IDQ0MiA1MDMgNDE2IiBzdHJva2U9IiNCNkMwRTMiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHJlY3QgeD0iMzIzIiB5PSI0ODYiIHdpZHRoPSIyNTQiIGhlaWdodD0iNzgiIHJ4PSIyNiIgZmlsbD0idXJsKCNnMSkiLz4KICAgIDxyZWN0IHg9IjM1MCIgeT0iNTA2IiB3aWR0aD0iOTIiIGhlaWdodD0iMTYiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgZmlsbC1vcGFjaXR5PSIuODUiLz4KICAgIDxyZWN0IHg9IjM1MCIgeT0iNTMzIiB3aWR0aD0iMTQ4IiBoZWlnaHQ9IjEwIiByeD0iNSIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iLjU1Ii8+CiAgICA8Y2lyY2xlIGN4PSI1NDEiIGN5PSI1MjUiIHI9IjE3IiBmaWxsPSJ3aGl0ZSIgZmlsbC1vcGFjaXR5PSIuOTIiLz4KICAgIDxyZWN0IHg9IjIxMiIgeT0iNDIwIiB3aWR0aD0iNzYiIGhlaWdodD0iMTE4IiByeD0iMjgiIGZpbGw9IiNEOURFRkYiLz4KICAgIDxyZWN0IHg9IjYxMiIgeT0iNDIwIiB3aWR0aD0iNzYiIGhlaWdodD0iMTE4IiByeD0iMjgiIGZpbGw9IiNDRkY1RkYiLz4KICAgIDxjaXJjbGUgY3g9IjI4NiIgY3k9IjU2NCIgcj0iNTgiIGZpbGw9IiMxMTE4M0MiLz4KICAgIDxjaXJjbGUgY3g9IjI4NiIgY3k9IjU2NCIgcj0iMjYiIGZpbGw9IiM3RTg3QTgiLz4KICAgIDxjaXJjbGUgY3g9IjYxNCIgY3k9IjU2NCIgcj0iNTgiIGZpbGw9IiMxMTE4M0MiLz4KICAgIDxjaXJjbGUgY3g9IjYxNCIgY3k9IjU2NCIgcj0iMjYiIGZpbGw9IiM3RTg3QTgiLz4KICA8L2c+CiAgPHBhdGggZD0iTTM0NyAyNDdMMzQ3IDIxMUMzNDcgMTg4IDM2NiAxNjkgMzg5IDE2OUg1MTFDNTM0IDE2OSA1NTMgMTg4IDU1MyAyMTFWMjQ3IiBzdHJva2U9IiM2QzYzRkYiIHN0cm9rZS13aWR0aD0iMTQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjM0NyIgY3k9IjI0NyIgcj0iMTUiIGZpbGw9IiM2QzYzRkYiLz4KICA8Y2lyY2xlIGN4PSI1NTMiIGN5PSIyNDciIHI9IjE1IiBmaWxsPSIjMTdDNkZGIi8+CiAgPHBhdGggZD0iTTcxOSA0MDdMNzYwIDM4M0w4MDEgNDA3TDc2MCA0MzFMNzE5IDQwN1oiIGZpbGw9IiNFNUU5RkYiLz4KICA8cGF0aCBkPSJNNzE5IDQwN1Y0NTVMNzYwIDQ3OVY0MzFMNzE5IDQwN1oiIGZpbGw9IiNEM0RBRkYiLz4KICA8cGF0aCBkPSJNODAxIDQwN1Y0NTVMNzYwIDQ3OVY0MzFMODAxIDQwN1oiIGZpbGw9IiNDNkNFRkYiLz4KICA8cGF0aCBkPSJNNzI0IDU0N0M3NTcgNTM3IDc4NCA1MTAgNzk1IDQ3OCIgc3Ryb2tlPSIjMTdDNkZGIiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iOCAxNiIvPgogIDxwYXRoIGQ9Ik0xMTEgMzk3QzExNiAzNTAgMTQxIDMwOCAxNzkgMjc5IiBzdHJva2U9IiM2QzYzRkYiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI4IDE2Ii8+Cjwvc3ZnPgo=" alt="Концепт подвижного робота-конструктора РОБКОН">
         <div class="hero-caption"><strong>Одна платформа — разные образы</strong>Сменные элементы внешнего дизайна</div>
       </div>
     </div>
@@ -237,8 +240,13 @@
       <div class="visual-card" aria-label="Схема модульной архитектуры РОБКОН">
         <div class="kicker" style="color:#76e1ff">Модульная конструкция</div>
         <h3 style="margin:0;font-size:26px">Оболочка меняется — платформа остаётся</h3>
-        <div class="shell s3"></div><div class="shell s2"></div><div class="shell s1"></div><div class="platform"></div>
-        <div class="visual-label">Схематичное представление принципа сменного корпуса</div>
+        <div class="module-demo" aria-hidden="true">
+          <div class="module-layer">Вариант корпуса 03</div>
+          <div class="module-layer">Вариант корпуса 02</div>
+          <div class="module-layer">Вариант корпуса 01</div>
+          <div class="module-base">Единая робототехническая платформа</div>
+        </div>
+        <div class="visual-label">Корпус меняется без замены базовой платформы</div>
       </div>
     </div>
   </section>
@@ -247,14 +255,14 @@
     <div class="wrap">
       <div class="section-head">
         <div><div class="kicker">Что получает пользователь</div><h2>Набор для сборки и запуска</h2></div>
-        <p>Сайт показывает только те элементы продукта, которые закреплены в материалах проекта. Параметры скорости, автономности и дальности управления пока не заявляются.</p>
+        <p>В набор входит всё необходимое для сборки подвижного робота на единой платформе и установки сменного внешнего корпуса.</p>
       </div>
       <div class="cards">
         <article class="card"><div class="card-icon">▰</div><h3>Колёсная платформа</h3><p>Единая база для установки разных вариантов внешнего оформления.</p></article>
         <article class="card"><div class="card-icon">⌁</div><h3>Модуль управления</h3><p>Электронная часть обеспечивает работу подвижной робототехнической платформы.</p></article>
         <article class="card"><div class="card-icon">⌁</div><h3>Пульт управления</h3><p>Конструкция предусматривает дистанционное управление готовой моделью.</p></article>
         <article class="card"><div class="card-icon">3D</div><h3>Детали корпуса</h3><p>Сменные элементы внешнего дизайна изготавливаются преимущественно методом 3D-печати.</p></article>
-        <article class="card"><div class="card-icon">↻</div><h3>Несколько образов</h3><p>Проект предусматривает возможность использовать несколько вариантов внешнего оформления на одной платформе.</p></article>
+        <article class="card"><div class="card-icon">↻</div><h3>Несколько образов</h3><p>Одна базовая платформа позволяет использовать несколько вариантов внешнего оформления.</p></article>
         <article class="card"><div class="card-icon">✓</div><h3>Понятная сборка</h3><p>Комплект ориентирован на воспроизводимую сборку с подготовленными деталями и инструкцией.</p></article>
       </div>
     </div>
@@ -264,7 +272,7 @@
     <div class="wrap">
       <div class="section-head">
         <div><div class="kicker">Для кого</div><h2>Для дома и технического творчества</h2></div>
-        <p>У проекта два основных сценария: персональный робот-конструктор для семьи и учебный набор для практических занятий.</p>
+        <p>РОБКОН подходит и для домашней сборки, и для практических занятий по техническому творчеству.</p>
       </div>
       <div class="audience">
         <article class="audience-card">
@@ -281,12 +289,12 @@
     </div>
   </section>
 
-  <section class="content soft" id="project">
+  <section class="content soft" id="company">
     <div class="wrap split">
       <div class="copy">
-        <div class="kicker">О проекте</div>
-        <h2>РОБКОН соединяет конструктор и персонализацию</h2>
-        <p>Проект направлен на создание подвижной робототехнической игрушки-конструктора с дистанционным управлением и сменными элементами внешнего дизайна. Базовая платформа сохраняется, а внешний облик можно менять.</p>
+        <div class="kicker">О компании</div>
+        <h2>РОБКОН создаёт персональные роботы-конструкторы</h2>
+        <p>ООО «РОБКОН» разрабатывает подвижные роботы-конструкторы с дистанционным управлением и сменным внешним дизайном. Одна базовая платформа сохраняется, а внешний корпус можно менять под новую идею.</p>
       </div>
       <div class="cards" style="grid-template-columns:1fr 1fr">
         <article class="card"><div class="card-icon">01</div><h3>Дом</h3><p>Сборка, управление и смена внешнего образа робота.</p></article>
@@ -300,8 +308,8 @@
       <div class="request-copy">
         <div class="kicker">Заявка</div>
         <h2>Расскажите, каким должен быть ваш РОБКОН</h2>
-        <p>Оставьте контакт и коротко опишите желаемый внешний вид. Форма сформирует письмо для ООО «РОБКОН» и откроет его в вашем почтовом приложении.</p>
-        <div class="contact">Email проекта: <a href="mailto:kamilazatovich12@gmail.com">kamilazatovich12@gmail.com</a></div>
+        <p>Оставьте контакт и коротко опишите желаемый внешний вид. Оставьте контакт и коротко опишите желаемый внешний вид. Заявка будет подготовлена для отправки в ООО «РОБКОН».</p>
+        <div class="contact">Email компании: <a href="mailto:kamilazatovich12@gmail.com">kamilazatovich12@gmail.com</a></div>
       </div>
       <form class="form-card" id="requestForm">
         <div class="form-grid">
@@ -311,7 +319,7 @@
           <div class="field full"><label for="idea">Каким вы хотите видеть робота? *</label><textarea id="idea" name="idea" required placeholder="Например: компактный робот-исследователь в космическом стиле"></textarea></div>
         </div>
         <div class="form-actions"><button class="btn" type="submit">Отправить заявку</button><span class="form-note">Нажатие откроет почтовое приложение с уже заполненным текстом заявки.</span></div>
-        <div class="form-status" id="formStatus">Письмо подготовлено. Если почтовое приложение не открылось, отправьте заявку вручную на адрес проекта.</div>
+        <div class="form-status" id="formStatus">Письмо подготовлено. Если почтовое приложение не открылось, отправьте заявку вручную на адрес компании.</div>
       </form>
     </div>
   </section>
@@ -319,8 +327,8 @@
 
 <footer>
   <div class="wrap footer-row">
-    <span><strong>ООО «РОБКОН»</strong> · проект № 114986</span>
-    <span>Создание подвижной робототехнической игрушки-конструктора с серийной персонализацией внешнего дизайна</span>
+    <span><strong>ООО «РОБКОН»</strong> · персональные роботы-конструкторы</span>
+    <span>Подвижная платформа · сменный дизайн · дистанционное управление</span>
   </div>
 </footer>
 
