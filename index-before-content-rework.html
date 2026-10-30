@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>РОБКОН — персональный робот-конструктор</title>
+  <meta name="description" content="РОБКОН — подвижный робот-конструктор с персонализируемым внешним дизайном, 3D-печатной модульной оболочкой и цифровым сопровождением.">
+  <style>
+    :root{
+      --ink:#101528;--muted:#66708a;--line:#e5e8f1;--soft:#f5f6fb;
+      --purple:#655cff;--purple2:#5148ea;--cyan:#15c7ff;--yellow:#ffbf3f;
+      --white:#fff;--dark:#0e1429;--radius:24px;--shadow:0 22px 70px rgba(24,31,72,.12)
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#fff;line-height:1.5}
+    a{color:inherit;text-decoration:none} button,input{font:inherit} img,svg{display:block;max-width:100%}
+    .wrap{width:min(1180px,calc(100% - 48px));margin:auto}
+    .header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(229,232,241,.8)}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.04em}.brand-mark{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),var(--cyan));color:white;box-shadow:0 8px 22px rgba(101,92,255,.25)}
+    .brand-mark svg{width:24px}.brand span{font-size:20px}.brand small{display:block;font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.11em;margin-top:-2px}
+    .nav-links{display:flex;align-items:center;gap:30px;font-size:14px;font-weight:700}.nav-links a:not(.btn):hover{color:var(--purple)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:14px;background:var(--purple);color:#fff;font-weight:800;border:1px solid var(--purple);transition:.18s transform,.18s background,.18s box-shadow;cursor:pointer}.btn:hover{background:var(--purple2);transform:translateY(-1px);box-shadow:0 10px 26px rgba(101,92,255,.24)}
+    .btn.secondary{background:white;color:var(--ink);border-color:var(--line)}.btn.secondary:hover{background:var(--soft);box-shadow:none}
+    .mobile-btn{display:none;border:0;background:transparent;padding:10px;color:var(--ink)}
+
+    .hero{padding:82px 0 60px;overflow:hidden;position:relative}.hero:before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(101,92,255,.13),rgba(21,199,255,.03) 58%,transparent 70%);right:-160px;top:-120px;pointer-events:none}
+    .hero-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:56px;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border-radius:999px;background:#f0efff;color:#4f47db;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.eyebrow:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--purple)}
+    h1{font-size:clamp(44px,6vw,74px);line-height:.98;letter-spacing:-.052em;margin:20px 0 22px;max-width:760px}.gradient{background:linear-gradient(90deg,var(--purple),#3f7cff 55%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero p{font-size:19px;color:var(--muted);max-width:640px;margin:0}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.hero-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:30px;color:var(--muted);font-size:13px}.hero-meta span{display:flex;align-items:center;gap:8px}.hero-meta i{width:8px;height:8px;border-radius:50%;background:var(--cyan);display:inline-block}
+    .hero-art{position:relative}.hero-art img{width:100%;filter:drop-shadow(0 26px 40px rgba(24,31,72,.08))}.float-card{position:absolute;background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 15px;box-shadow:var(--shadow);font-size:12px;font-weight:800}.float-card b{display:block;font-size:14px;margin-bottom:2px}.fc1{left:1%;top:17%}.fc2{right:0;bottom:16%}.fc1:before,.fc2:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}.fc1:before{background:var(--yellow)}.fc2:before{background:var(--cyan)}
+
+    section{padding:86px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:40px}.kicker{font-size:12px;color:var(--purple);font-weight:900;letter-spacing:.11em;text-transform:uppercase;margin-bottom:10px}.section-head h2,.split h2{font-size:clamp(34px,4.2vw,50px);line-height:1.05;letter-spacing:-.035em;margin:0}.section-head p{max-width:520px;color:var(--muted);margin:0;font-size:16px}
+
+    .steps{background:var(--soft)}.step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.step{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;min-height:245px;position:relative;overflow:hidden}.step-no{font-size:13px;color:var(--purple);font-weight:900;letter-spacing:.08em}.step-icon{width:52px;height:52px;border-radius:16px;background:#f0efff;color:var(--purple);display:grid;place-items:center;margin:28px 0 22px}.step-icon svg{width:25px}.step h3{font-size:20px;margin:0 0 10px}.step p{font-size:14px;color:var(--muted);margin:0}.step:after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;right:-38px;bottom:-38px;background:rgba(21,199,255,.08)}
+
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}.copy p{color:var(--muted);font-size:17px}.bullet-list{display:grid;gap:14px;margin-top:26px}.bullet{display:flex;gap:14px;align-items:flex-start}.check{width:26px;height:26px;min-width:26px;border-radius:8px;background:#eeedff;color:var(--purple);display:grid;place-items:center;font-weight:900}.bullet b{display:block;margin-bottom:3px}.bullet span{font-size:14px;color:var(--muted)}
+    .shell-card{background:linear-gradient(145deg,#111833,#1c2651);border-radius:30px;min-height:450px;padding:34px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow)}.shell-card:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,rgba(21,199,255,.35),transparent 68%);right:-70px;top:-100px}.shell-stack{position:absolute;inset:95px 55px 55px;display:grid;place-items:center}.shell-layer{position:absolute;width:70%;height:180px;border:2px solid rgba(255,255,255,.26);border-radius:36px;transform:perspective(700px) rotateX(58deg) rotateZ(-12deg);background:rgba(255,255,255,.04)}.shell-layer:nth-child(2){transform:translateY(72px) perspective(700px) rotateX(58deg) rotateZ(-12deg);border-color:rgba(21,199,255,.75);background:rgba(21,199,255,.07)}.shell-layer:nth-child(3){transform:translateY(144px) perspective(700px) rotateX(58deg) rotateZ(-12deg);border-color:rgba(101,92,255,.82);background:rgba(101,92,255,.11)}.shell-label{position:absolute;bottom:28px;left:34px;color:#cbd3f1;font-size:13px}
+
+    .features{background:linear-gradient(180deg,#fff,#fafbff)}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature{border:1px solid var(--line);border-radius:22px;padding:26px;background:#fff}.feature-icon{width:46px;height:46px;border-radius:14px;background:#f1f3ff;display:grid;place-items:center;color:var(--purple);margin-bottom:22px}.feature h3{font-size:18px;margin:0 0 9px}.feature p{font-size:14px;color:var(--muted);margin:0}
+
+    .demo{background:#0f1530;color:#fff}.demo .section-head p{color:#aeb8d7}.demo .kicker{color:#7fdfff}.demo-box{display:grid;grid-template-columns:1fr 1fr;background:#171f43;border:1px solid rgba(255,255,255,.09);border-radius:26px;overflow:hidden}.demo-form{padding:34px;border-right:1px solid rgba(255,255,255,.09)}.demo-form label{display:block;font-size:13px;font-weight:800;color:#cbd3ee;margin-bottom:10px}.prompt{width:100%;border:1px solid rgba(255,255,255,.13);background:#10162f;color:white;border-radius:16px;padding:16px 17px;outline:none}.prompt:focus{border-color:#6c63ff;box-shadow:0 0 0 3px rgba(101,92,255,.14)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 24px}.chip{border:1px solid rgba(255,255,255,.13);background:transparent;color:#d6dcf2;border-radius:999px;padding:8px 11px;font-size:12px;cursor:pointer}.chip:hover{border-color:#6c63ff;color:#fff}.demo-form .btn{width:100%}.demo-note{font-size:11px;color:#8390b8;margin-top:12px}.demo-preview{min-height:350px;padding:34px;display:grid;place-items:center;background:radial-gradient(circle at 70% 30%,rgba(21,199,255,.15),transparent 35%)}.mini-robot{width:250px;height:205px;position:relative}.mini-body{position:absolute;left:35px;right:35px;top:20px;height:120px;border-radius:32px;background:linear-gradient(145deg,#fff,#dfe5ff);box-shadow:0 18px 40px rgba(0,0,0,.22);transition:.3s}.mini-screen{position:absolute;left:62px;right:62px;top:49px;height:58px;border-radius:20px;background:#0d1430}.mini-screen:before,.mini-screen:after{content:"";position:absolute;top:19px;width:13px;height:13px;border-radius:50%;background:var(--cyan)}.mini-screen:before{left:28px}.mini-screen:after{right:28px;background:var(--purple)}.wheel{position:absolute;bottom:5px;width:64px;height:64px;border-radius:50%;background:#090e20;border:12px solid #252e53}.w1{left:25px}.w2{right:25px}.preview-caption{text-align:center;margin-top:230px;position:absolute;color:#b8c2e2;font-size:12px}.style-space .mini-body{background:linear-gradient(145deg,#e9eaff,#99a3ff)}.style-racer .mini-body{border-radius:22px;background:linear-gradient(145deg,#fff0c7,#ffbb36)}.style-animal .mini-body{border-radius:46px 46px 28px 28px;background:linear-gradient(145deg,#dffcff,#83e6ff)}
+
+    .audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.audience-card{border-radius:26px;padding:34px;border:1px solid var(--line);min-height:270px;position:relative;overflow:hidden}.audience-card:first-child{background:#f2f1ff}.audience-card:last-child{background:#ecfbff}.audience-tag{font-size:12px;font-weight:900;color:var(--purple);letter-spacing:.08em}.audience-card h3{font-size:28px;margin:12px 0 12px}.audience-card p{max-width:470px;color:var(--muted)}.audience-card ul{padding-left:20px;color:var(--muted);font-size:14px}.orb{position:absolute;width:180px;height:180px;border-radius:50%;right:-55px;bottom:-70px;background:rgba(101,92,255,.09)}.audience-card:last-child .orb{background:rgba(21,199,255,.14)}
+
+    .project-band{padding:0 0 86px}.project-card{border-radius:28px;padding:44px;background:linear-gradient(110deg,#635aff,#557dff 52%,#14c8ff);color:white;display:flex;align-items:center;justify-content:space-between;gap:40px}.project-card h2{font-size:36px;line-height:1.08;margin:0 0 10px}.project-card p{margin:0;color:rgba(255,255,255,.82);max-width:720px}.project-card .btn{background:#fff;color:#272d54;border-color:#fff;white-space:nowrap}
+
+    footer{background:#0d1227;color:#fff;padding:48px 0 28px}.footer-grid{display:grid;grid-template-columns:1.3fr .7fr .7fr;gap:40px}.footer-brand p{color:#929dbd;max-width:420px;font-size:14px}.footer h4{font-size:13px;margin:0 0 14px;color:#c8d0e8}.footer a{display:block;color:#929dbd;font-size:14px;margin:9px 0}.footer a:hover{color:white}.footer-bottom{margin-top:38px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;color:#707b9b;font-size:12px}
+
+    @media(max-width:900px){.nav-links{display:none}.mobile-btn{display:block}.nav-links.open{position:absolute;display:flex;flex-direction:column;align-items:stretch;top:78px;left:0;right:0;background:#fff;padding:22px 24px 26px;border-bottom:1px solid var(--line);box-shadow:0 18px 40px rgba(16,21,40,.08)}.hero{padding-top:54px}.hero-grid,.split,.demo-box{grid-template-columns:1fr}.hero-art{max-width:690px;margin:auto}.step-grid{grid-template-columns:1fr 1fr}.feature-grid{grid-template-columns:1fr 1fr}.demo-form{border-right:0;border-bottom:1px solid rgba(255,255,255,.09)}.audience-grid{grid-template-columns:1fr}.project-card{align-items:flex-start;flex-direction:column}.footer-grid{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}}
+    @media(max-width:620px){.wrap{width:min(100% - 30px,1180px)}.nav{height:70px}.brand small{display:none}.hero{padding:42px 0 44px}.hero-grid{gap:18px}h1{font-size:46px}.float-card{display:none}section{padding:64px 0}.section-head{align-items:flex-start;flex-direction:column;gap:14px}.step-grid,.feature-grid{grid-template-columns:1fr}.step{min-height:auto}.shell-card{min-height:370px}.shell-stack{inset:75px 20px 45px}.demo-form,.demo-preview{padding:24px}.project-card{padding:30px}.project-card h2{font-size:30px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:8px}}
+  </style>
+</head>
+<body>
+<header class="header">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="РОБКОН — на главную">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 7.5 12 3l7 4.5v9L12 21l-7-4.5v-9Z" stroke="currentColor" stroke-width="2"/><path d="M8.5 10h7v5h-7z" fill="currentColor"/><circle cx="10.2" cy="12.3" r=".8" fill="#655cff"/><circle cx="13.8" cy="12.3" r=".8" fill="#15c7ff"/></svg></span>
+      <span>РОБКОН<small>ПЕРСОНАЛЬНЫЙ РОБОТ-КОНСТРУКТОР</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#how">Как это работает</a><a href="#product">Продукт</a><a href="#features">Возможности</a><a href="#audience">Для кого</a><a class="btn" href="#demo">Создать робота</a>
+    </nav>
+    <button class="mobile-btn" id="mobileBtn" aria-label="Открыть меню"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Робототехника × персонализация</span>
+      <h1>Робот, которого <span class="gradient">придумали вы</span></h1>
+      <p>Задайте идею будущего робота. Цифровой сервис помогает превратить её в дизайн корпуса, а модульная конструкция — в набор деталей для сборки на единой подвижной платформе.</p>
+      <div class="hero-actions"><a class="btn" href="#demo">Попробовать концепт</a><a class="btn secondary" href="#how">Как это устроено</a></div>
+      <div class="hero-meta"><span><i></i>Сменный внешний дизайн</span><span><i></i>3D-печатные детали</span><span><i></i>Дистанционное управление</span></div>
+    </div>
+    <div class="hero-art">
+      <img src="assets/robocon-hero.svg" alt="Иллюстрация персонального робота-конструктора РОБКОН">
+      <div class="float-card fc1"><b>01 · Идея</b>текст, эскиз или изображение</div>
+      <div class="float-card fc2"><b>04 · Сборка</b>ваш робот готов к движению</div>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="how">
+  <div class="wrap">
+    <div class="section-head"><div><div class="kicker">Как это работает</div><h2>От идеи — к роботу</h2></div><p>Одна базовая роботоплатформа остаётся неизменной, а внешний облик формируется под конкретную идею пользователя.</p></div>
+    <div class="step-grid">
+      <article class="step"><div class="step-no">ШАГ 01</div><div class="step-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v10H8l-4 4V5Z" stroke="currentColor" stroke-width="2"/><path d="M8 9h8M8 12h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><h3>Опишите идею</h3><p>Текстовый запрос, изображение или эскиз задают характер будущего дизайна.</p></article>
+      <article class="step"><div class="step-no">ШАГ 02</div><div class="step-icon"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" stroke="currentColor" stroke-width="2"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9" stroke="currentColor" stroke-width="2"/></svg></div><h3>Получите 3D-дизайн</h3><p>Система формирует модель корпуса и адаптирует её под геометрию базовой платформы.</p></article>
+      <article class="step"><div class="step-no">ШАГ 03</div><div class="step-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="7" height="6" rx="1" stroke="currentColor" stroke-width="2"/><rect x="13" y="5" width="7" height="6" rx="1" stroke="currentColor" stroke-width="2"/><rect x="8.5" y="13" width="7" height="6" rx="1" stroke="currentColor" stroke-width="2"/></svg></div><h3>Разбейте на детали</h3><p>Корпус переводится в набор сборочных блоков с маркировкой, спецификацией и инструкцией.</p></article>
+      <article class="step"><div class="step-no">ШАГ 04</div><div class="step-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="7" cy="17" r="3" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="17" r="3" stroke="currentColor" stroke-width="2"/><path d="M5 14V8h14v6M9 8V5h6v3" stroke="currentColor" stroke-width="2"/></svg></div><h3>Соберите и управляйте</h3><p>Детали устанавливаются на колесную платформу, а готовый робот управляется дистанционно.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  <div class="wrap split">
+    <div class="copy"><div class="kicker">Принцип продукта</div><h2>Одна платформа. Много обликов.</h2><p>РОБКОН разделяет функциональную базу и внешний дизайн. Это позволяет менять корпусные элементы без полной замены электроники и ходовой части.</p>
+      <div class="bullet-list">
+        <div class="bullet"><div class="check">✓</div><div><b>Унифицированная роботоплатформа</b><span>Колёсная база, питание, привод, модуль управления и дистанционное управление.</span></div></div>
+        <div class="bullet"><div class="check">✓</div><div><b>Сменная модульная оболочка</b><span>Детали внешнего оформления изготавливаются преимущественно методом 3D-печати.</span></div></div>
+        <div class="bullet"><div class="check">✓</div><div><b>Повторная персонализация</b><span>Новый внешний образ не требует проектировать базовую платформу заново.</span></div></div>
+      </div>
+    </div>
+    <div class="shell-card"><div class="kicker" style="color:#8ce3ff">Модульная архитектура</div><h3 style="font-size:26px;margin:0">Платформа → крепления → оболочка</h3><div class="shell-stack"><div class="shell-layer"></div><div class="shell-layer"></div><div class="shell-layer"></div></div><div class="shell-label">Концептуальная схема модульной сборки</div></div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap"><div class="section-head"><div><div class="kicker">Возможности</div><h2>Не просто готовая игрушка</h2></div><p>Концепция объединяет конструирование, цифровой дизайн, аддитивное производство и управляемую робототехнику.</p></div>
+    <div class="feature-grid">
+      <article class="feature"><div class="feature-icon">✦</div><h3>Персональный дизайн</h3><p>Пользователь задаёт идею внешнего вида вместо выбора только из заранее подготовленных вариантов.</p></article>
+      <article class="feature"><div class="feature-icon">3D</div><h3>3D-печатная оболочка</h3><p>Внешние элементы адаптируются для изготовления и последующей сборки на базовой платформе.</p></article>
+      <article class="feature"><div class="feature-icon">⌘</div><h3>Цифровое сопровождение</h3><p>Модель, сборочные блоки, комплектовочный лист и инструкция формируют единый цифровой цикл.</p></article>
+      <article class="feature"><div class="feature-icon">↻</div><h3>Сменные элементы</h3><p>Отдельные детали внешнего оформления можно заменять, сохраняя робототехническую основу.</p></article>
+      <article class="feature"><div class="feature-icon">◉</div><h3>Подвижная платформа</h3><p>Робот рассчитан на управляемое движение и дистанционное управление.</p></article>
+      <article class="feature"><div class="feature-icon">⚙</div><h3>Образовательный формат</h3><p>Продукт подходит для занятий по робототехнике, инженерному дизайну и проектной деятельности.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="demo" id="demo">
+  <div class="wrap"><div class="section-head"><div><div class="kicker">Демо-конфигуратор</div><h2>Как может выглядеть персонализация</h2></div><p>Это демонстрация интерфейса будущего сервиса. Она не выполняет реальную генерацию 3D-модели.</p></div>
+    <div class="demo-box">
+      <div class="demo-form"><label for="robotPrompt">Опишите будущего робота</label><input id="robotPrompt" class="prompt" value="Компактный космический исследователь" maxlength="120"><div class="chips"><button class="chip" data-style="space">Космос</button><button class="chip" data-style="racer">Гоночный</button><button class="chip" data-style="animal">Робо-зверь</button></div><button class="btn" id="generateBtn" type="button">Показать концепт</button><div class="demo-note">Демонстрационный режим: меняется только визуальный стиль макета.</div></div>
+      <div class="demo-preview"><div class="mini-robot style-space" id="miniRobot"><div class="mini-body"></div><div class="mini-screen"></div><div class="wheel w1"></div><div class="wheel w2"></div><div class="preview-caption" id="previewCaption">Компактный космический исследователь</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="audience">
+  <div class="wrap"><div class="section-head"><div><div class="kicker">Для кого</div><h2>Дом и образование</h2></div><p>Концепция рассчитана как на частных пользователей, так и на образовательные площадки.</p></div>
+    <div class="audience-grid">
+      <article class="audience-card"><div class="audience-tag">B2C</div><h3>Для дома и подарка</h3><p>Для семей, детей и любителей конструкторов, которым важен не только процесс сборки, но и уникальный внешний образ.</p><ul><li>персонализированный дизайн;</li><li>сборка собственными руками;</li><li>сменные элементы оболочки.</li></ul><div class="orb"></div></article>
+      <article class="audience-card"><div class="audience-tag">B2B</div><h3>Для кружков и школ</h3><p>Для кружков, школ, технопарков и центров технического творчества как база для проектной и инженерной работы.</p><ul><li>робототехника;</li><li>инженерный дизайн;</li><li>3D-моделирование и аддитивные технологии.</li></ul><div class="orb"></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="project-band">
+  <div class="wrap"><div class="project-card"><div><h2>РОБКОН — конструктор, который становится вашим</h2><p>Проект «Создание подвижной робототехнической игрушки-конструктора с серийной персонализацией внешнего дизайна», № 114986.</p></div><a class="btn" href="#top">Наверх ↑</a></div></div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap"><div class="footer-grid"><div class="footer-brand"><div class="brand"><span class="brand-mark">R</span><span>РОБКОН</span></div><p>Подвижный робот-конструктор с персонализируемым внешним дизайном и цифровым сопровождением.</p></div><div><h4>Навигация</h4><a href="#how">Как это работает</a><a href="#product">Продукт</a><a href="#features">Возможности</a></div><div><h4>Проект</h4><a href="#audience">Для кого</a><a href="#demo">Демо-конфигуратор</a></div></div><div class="footer-bottom"><span>© 2026 ООО «РОБКОН»</span><span>Прототип сайта проекта</span></div></div>
+</footer>
+<script>
+  const mobileBtn=document.getElementById('mobileBtn'); const navLinks=document.getElementById('navLinks');
+  mobileBtn.addEventListener('click',()=>navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+  const robot=document.getElementById('miniRobot'); const prompt=document.getElementById('robotPrompt'); const caption=document.getElementById('previewCaption');
+  let style='space';
+  document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{style=b.dataset.style;document.querySelectorAll('.chip').forEach(x=>x.style.borderColor='');b.style.borderColor='#6c63ff'}));
+  document.getElementById('generateBtn').addEventListener('click',()=>{robot.className='mini-robot style-'+style;caption.textContent=prompt.value.trim()||'Ваш персональный робот';});
+</script>
+</body>
+</html>

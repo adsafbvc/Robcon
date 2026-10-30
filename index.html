@@ -108,6 +108,18 @@
     .card p{margin:0;color:var(--muted);font-size:14px;line-height:1.58}
 
     /* Audience */
+    .product-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .product-shot{margin:0;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 12px 32px rgba(18,27,51,.05)}
+    .product-photo{aspect-ratio:4/3;background:linear-gradient(145deg,#f5f7ff,#eef1fa);display:grid;place-items:center;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+    .product-photo:before{content:"";position:absolute;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(108,99,255,.13),transparent 70%);top:-40px;right:-30px}
+    .product-photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .photo-placeholder{position:relative;z-index:1;text-align:center;padding:28px;color:#66738a}
+    .photo-placeholder svg{width:42px;height:42px;margin:0 auto 14px;color:var(--accent)}
+    .photo-placeholder strong{display:block;color:var(--ink);font-size:17px;margin-bottom:5px}
+    .photo-placeholder span{font-size:13px;line-height:1.45}
+    .product-shot figcaption{padding:20px 22px 22px}
+    .product-shot h3{font-size:20px;margin:0 0 8px}
+    .product-shot p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
     .audience{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     .audience-card{border:1px solid var(--line);border-radius:22px;padding:30px;background:#fff;position:relative;overflow:hidden}
     .audience-card h3{font-size:27px;margin:5px 0 10px}
@@ -146,7 +158,7 @@
       .support-inner{grid-template-columns:140px 170px 1px minmax(0,1fr);gap:16px}
       .hero-grid,.split,.request-grid{grid-template-columns:1fr;gap:36px}
       .hero{min-height:auto}.hero-grid{padding-top:48px}.hero-art{max-width:720px;margin-inline:auto}
-      .section-head{grid-template-columns:1fr;gap:16px}.steps{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}
+      .section-head{grid-template-columns:1fr;gap:16px}.steps{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}.product-gallery{grid-template-columns:repeat(2,1fr)}
     }
     @media(max-width:700px){
       .wrap{width:min(100% - 32px,1200px)}
@@ -155,7 +167,7 @@
       .support-divider{display:none}.support-text{grid-column:1/-1;font-size:11.5px}
       .support-logo img{max-height:58px}.support-logo.platform img{max-height:48px}
       .hero-grid{padding:40px 0 50px;gap:28px}h1{font-size:42px}.hero-lead{font-size:17px}.hero-caption{display:none}
-      section.content{padding:66px 0}.steps,.cards,.audience,.form-grid{grid-template-columns:1fr}
+      section.content{padding:66px 0}.steps,.cards,.audience,.form-grid,.product-gallery{grid-template-columns:1fr}
       .field.full{grid-column:auto}.visual-card{min-height:390px}.request-grid{gap:30px}.form-card{padding:20px}
     }
   </style>
@@ -170,6 +182,7 @@
     <nav class="nav-links" id="navLinks" aria-label="Основная навигация">
       <a href="#how">Как это работает</a>
       <a href="#advantages">Возможности</a>
+      <a href="#examples">Примеры</a>
       <a href="#audience">Для кого</a>
       <a href="#company">О компании</a>
       <a class="btn" href="#request">Оставить заявку</a>
@@ -182,8 +195,7 @@
   <div class="wrap support-inner">
     <div class="support-logo"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI4LjIuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9Il/QodC70L7QuV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiCgkgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTUyLjUgNzQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDE1Mi41IDc0OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzFCMzk2ODt9Cgkuc3Qxe2ZpbGw6I0ZGRkZGRjt9Cgkuc3Qye2ZpbGw6I0UyMkEyQTt9Cgkuc3Qze2ZpbGw6IzMzOUZEOTt9Cgkuc3Q0e2ZpbGw6I0UxRjFGOTt9Cjwvc3R5bGU+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMy4yLDEyLjNjMCwwLjUtMC4xLDEtMC4zLDEuNHMtMC40LDAuNy0wLjgsMWMtMC4zLDAuMy0wLjcsMC41LTEuMSwwLjZjLTAuNCwwLjEtMC44LDAuMi0xLjIsMC4zdjFoLTJ2LTFsMCwwCgljLTAuNi0wLjEtMS4xLTAuMi0xLjUtMC40cy0wLjgtMC40LTEtMC44Yy0wLjMtMC4zLTAuNS0wLjctMC42LTEuMWMtMC4xLTAuNC0wLjItMC45LTAuMi0xLjRWNy43YzAtMC41LDAuMS0xLDAuMy0xLjQKCWMwLjItMC40LDAuNC0wLjcsMC44LTFDNS45LDUsNi4zLDQuOCw2LjcsNC43YzAuNC0wLjEsMC44LTAuMiwxLjItMC4yVjMuOGgydjAuN2MwLjQsMCwwLjgsMC4xLDEuMiwwLjJjMC40LDAuMiwwLjcsMC40LDEuMSwwLjYKCWMwLjMsMC4zLDAuNiwwLjYsMC43LDFjMC4yLDAuNCwwLjMsMC45LDAuMywxLjRWMTIuMyBNNy45LDZDNy41LDYuMSw3LjEsNi4zLDYuOCw2LjVDNi42LDYuNyw2LjUsNy4xLDYuNSw3LjZ2NC45CgljMCwwLjIsMCwwLjQsMC4xLDAuNmMwLjEsMC4yLDAuMiwwLjMsMC4zLDAuNGMwLjEsMC4xLDAuMywwLjIsMC41LDAuM3MwLjQsMC4xLDAuNSwwLjFWNkw3LjksNnogTTExLjQsNy42YzAtMC41LTAuMS0wLjgtMC40LTEuMQoJYy0wLjMtMC4zLTAuNi0wLjQtMS0wLjRWMTRjMC4yLDAsMC4zLTAuMSwwLjUtMC4xYzAuMi0wLjEsMC4zLTAuMiwwLjUtMC4zYzAuMS0wLjEsMC4zLTAuMywwLjMtMC40YzAuMS0wLjIsMC4xLTAuNCwwLjEtMC42CglMMTEuNCw3LjZMMTEuNCw3LjZ6Ii8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yMy4yLDEzLjNjMCwxLjEtMC4zLDEuOS0wLjgsMi41Yy0wLjUsMC42LTEuMywwLjgtMi40LDAuOHMtMS45LTAuMy0yLjQtMC44Yy0wLjUtMC41LTAuNy0xLjMtMC43LTIuNFY3LjEKCWMwLTAuNSwwLjEtMSwwLjItMS40czAuMy0wLjgsMC41LTEuMWMwLjMtMC4zLDAuNi0wLjUsMS0wLjdDMTksMy44LDE5LjQsMy43LDIwLDMuN3MxLjEsMC4xLDEuNSwwLjJjMC40LDAuMiwwLjcsMC40LDEsMC43CgljMC4yLDAuMywwLjQsMC43LDAuNSwxLjFzMC4yLDAuOSwwLjIsMS40VjEzLjMgTTIxLjEsNi45YzAtMC40LTAuMS0wLjctMC4yLTFjLTAuMi0wLjMtMC40LTAuNC0wLjktMC40Yy0wLjIsMC0wLjQsMC0wLjYsMC4yCgljLTAuMSwwLjEtMC4zLDAuMi0wLjQsMC40cy0wLjEsMC4zLTAuMiwwLjVjMCwwLjIsMCwwLjQsMCwwLjV2Ni40YzAsMC4zLDAuMSwwLjYsMC4zLDAuOWMwLjIsMC4zLDAuNSwwLjQsMC45LDAuNHMwLjctMC4xLDAuOS0wLjQKCWMwLjItMC4zLDAuMy0wLjYsMC4zLTFMMjEuMSw2LjlMMjEuMSw2Ljl6Ii8+Cjxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9IjMxLjMsMTYuNiAzMS4zLDExIDI5LDExIDI5LDE2LjYgMjcsMTYuNiAyNywzLjggMjksMy44IDI5LDkuMSAzMS4zLDkuMSAzMS4zLDMuOCAzMy4zLDMuOCAzMy4zLDE2LjYgCgkzMS4zLDE2LjYgIi8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zOCwxNi42VjE5aC0xLjd2LTQuMWwwLjgtMC4yYzAuNC0wLjQsMC42LTAuOCwwLjctMS4zYzAuMS0wLjUsMC4yLTEuMSwwLjItMS45bDAuMi03LjdINDR2MTAuOWgwLjhWMTloLTEuNwoJdi0yLjRIMzggTTM5LjksMTEuNWMwLDAuNy0wLjEsMS40LTAuMSwxLjljLTAuMSwwLjUtMC4yLDEtMC40LDEuM2gyLjh2LTlINDBMMzkuOSwxMS41eiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTcsMy43YzAuNSwwLDEsMC4xLDEuNCwwLjJjMC40LDAuMSwwLjcsMC40LDEsMC42YzAuMywwLjMsMC40LDAuNiwwLjYsMC45YzAsMC40LDAsMC44LDAsMS4ybC0yLDAuNQoJYzAtMC41LTAuMS0wLjgtMC4zLTEuMWMtMC4yLTAuMy0wLjUtMC40LTAuOS0wLjRjLTAuMiwwLTAuNCwwLTAuNiwwLjFjLTAuMSwwLjEtMC4zLDAuMi0wLjMsMC40Yy0wLjEsMC4yLTAuMSwwLjMtMC4yLDAuNQoJYzAsMC4yLDAsMC40LDAsMC41djYuNWMwLDAuMSwwLDAuMywwLDAuNGMwLDAuMiwwLjEsMC4zLDAuMiwwLjRjMC4xLDAuMSwwLjIsMC4yLDAuMywwLjNzMC4zLDAuMSwwLjUsMC4xYzAuNywwLDEuMS0wLjUsMS4xLTEuNgoJYzAuMywwLjEsMC43LDAuMSwxLDAuMnMwLjcsMC4xLDEsMC4xYzAsMS0wLjMsMS43LTAuOCwyLjNjLTAuNSwwLjYtMS4zLDAuOC0yLjMsMC44Yy0xLjEsMC0xLjktMC4zLTIuNC0wLjgKCWMtMC41LTAuNS0wLjgtMS4zLTAuOC0yLjNWNy4yYzAtMC41LDAtMC45LDAuMi0xLjRDNTMuOCw1LjQsNTQsNSw1NC4yLDQuN2MwLjMtMC4zLDAuNi0wLjYsMS0wLjdDNTUuOSwzLjgsNTYuNCwzLjcsNTcsMy43Ii8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02OS42LDEzLjNjMCwxLjEtMC4zLDEuOS0wLjgsMi41Yy0wLjUsMC42LTEuMywwLjgtMi40LDAuOHMtMS45LTAuMy0yLjQtMC44Yy0wLjUtMC41LTAuNy0xLjMtMC43LTIuNFY3LjEKCWMwLTAuNSwwLjEtMSwwLjItMS40YzAuMS0wLjQsMC4zLTAuOCwwLjUtMS4xYzAuMi0wLjMsMC42LTAuNSwxLTAuN3MwLjktMC4zLDEuNC0wLjNjMC42LDAsMS4xLDAuMSwxLjUsMC4yYzAuNCwwLjIsMC43LDAuNCwxLDAuNwoJYzAuMiwwLjMsMC40LDAuNywwLjUsMS4xczAuMiwwLjksMC4yLDEuNEw2OS42LDEzLjMgTTY3LjYsNi45YzAtMC40LTAuMS0wLjctMC4yLTFjLTAuMi0wLjMtMC40LTAuNC0wLjktMC40Yy0wLjIsMC0wLjQsMC0wLjYsMC4yCgljLTAuMSwwLjEtMC4zLDAuMi0wLjQsMC40cy0wLjEsMC4zLTAuMiwwLjVjMCwwLjIsMCwwLjQsMCwwLjV2Ni40YzAsMC4zLDAuMSwwLjYsMC4zLDAuOWMwLjIsMC4zLDAuNSwwLjQsMC45LDAuNHMwLjctMC4xLDAuOS0wLjQKCWMwLjItMC4zLDAuMy0wLjYsMC4zLTFMNjcuNiw2LjlMNjcuNiw2Ljl6Ii8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik03NC4zLDE2LjZWMTloLTEuN3YtNC4xbDAuOC0wLjJjMC40LTAuNCwwLjYtMC44LDAuNy0xLjNzMC4yLTEuMSwwLjItMS45bDAuMi03LjdoNS44djEwLjloMC44VjE5aC0xLjd2LTIuNAoJSDc0LjMgTTc2LjEsMTEuNWMwLDAuNy0wLjEsMS40LTAuMSwxLjljLTAuMSwwLjUtMC4yLDEtMC40LDEuM2gyLjh2LTloLTIuMUw3Ni4xLDExLjV6Ii8+Cjxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9Ijg0LjQsMTYuNiA4NC40LDMuOCA5MC4yLDMuOCA5MC4yLDUuNiA4Ni40LDUuNiA4Ni40LDkuMSA4OS43LDkuMSA4OS43LDExIDg2LjQsMTEgODYuNCwxNC43IAoJOTAuMiwxNC43IDkwLjIsMTYuNiA4NC40LDE2LjYgIi8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw4LjZsLTIuNyw4aC0xLjlWMy44aDJ2OC4xaDAuMWwyLjctOC4xaDJ2MTIuN2gtMkw5OCw4LjZMOTgsOC42IE05NS42LDAuOWMwLDAuMSwwLDAuMywwLjEsMC40CgljMC4xLDAuMSwwLjIsMC4zLDAuMywwLjRjMC4xLDAuMSwwLjIsMC4yLDAuNCwwLjNjMC4xLDAuMSwwLjMsMC4xLDAuNSwwLjFzMC40LDAsMC41LTAuMXMwLjMtMC4yLDAuNC0wLjNTOTgsMS41LDk4LDEuMwoJczAtMC4zLDAtMC40aDEuNWMwLDAuMi0wLjEsMC41LTAuMiwwLjhDOTkuMiwyLDk5LDIuMyw5OC44LDIuNkM5OC42LDIuOCw5OC4zLDMsOTgsMy4ycy0wLjcsMC4yLTEuMSwwLjJjLTAuNSwwLTAuOS0wLjEtMS4yLTAuMgoJQzk1LjMsMyw5NSwyLjgsOTQuOCwyLjZzLTAuNC0wLjUtMC41LTAuOFM5NC4xLDEuMiw5NC4xLDFMOTUuNiwwLjlMOTUuNiwwLjl6Ii8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMDYuOSwzLjdjMC41LDAsMSwwLjEsMS40LDAuMmMwLjQsMC4xLDAuNywwLjQsMSwwLjZjMC4zLDAuMywwLjQsMC42LDAuNiwwLjljMC4xLDAuNCwwLjIsMC43LDAuMiwxLjJsLTIsMC41CgljMC0wLjUtMC4xLTAuOC0wLjMtMS4xYy0wLjItMC4zLTAuNS0wLjQtMC45LTAuNGMtMC4yLDAtMC40LDAtMC42LDAuMWMtMC4xLDAuMS0wLjMsMC4yLTAuMywwLjRjLTAuMSwwLjItMC4xLDAuMy0wLjIsMC41CgljMCwwLjIsMCwwLjQsMCwwLjV2Ni41YzAsMC4xLDAsMC4zLDAsMC40YzAsMC4yLDAuMSwwLjMsMC4yLDAuNGMwLjEsMC4xLDAuMiwwLjIsMC4zLDAuM2MwLjEsMC4xLDAuMywwLjEsMC41LDAuMQoJYzAuNywwLDEuMS0wLjUsMS4xLTEuNmMwLjMsMC4xLDAuNywwLjEsMSwwLjJzMC43LDAuMSwxLDAuMWMwLDEtMC4zLDEuNy0wLjgsMi4zYy0wLjUsMC42LTEuMywwLjgtMi4zLDAuOGMtMS4xLDAtMS44LTAuMy0yLjQtMC44CglzLTAuOC0xLjMtMC44LTIuM1Y3LjJjMC0wLjUsMC0wLjksMC4yLTEuNGMwLjEtMC40LDAuMy0wLjgsMC41LTEuMWMwLjMtMC4zLDAuNi0wLjYsMS0wLjdDMTA1LjgsMy44LDEwNi4zLDMuNywxMDYuOSwzLjciLz4KPHBvbHlsaW5lIGNsYXNzPSJzdDAiIHBvaW50cz0iMTE2LjYsNS42IDExNi42LDE2LjYgMTE0LjYsMTYuNiAxMTQuNiw1LjYgMTEyLjUsNS42IDExMi41LDMuOCAxMTguNywzLjggMTE4LjcsNS42IDExNi42LDUuNiAiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyNi40LDkuOWMwLjYsMC4yLDEsMC41LDEuMiwxczAuMywxLjEsMC4zLDEuOGMwLDEuMy0wLjMsMi4zLTAuOSwyLjlzLTEuNSwwLjktMi43LDAuOWgtMi43VjMuOGgyLjgKCWMxLjEsMCwyLDAuMywyLjUsMC45czAuOCwxLjUsMC44LDIuNmMwLDAuNi0wLjEsMS4xLTAuMywxLjVDMTI3LjMsOS4yLDEyNi45LDkuNiwxMjYuNCw5LjlMMTI2LjQsOS45IE0xMjUuOSw3LjMKCWMwLTAuNi0wLjEtMS0wLjQtMS4zYy0wLjItMC4zLTAuNi0wLjQtMS4yLTAuNGgtMC42djMuM2gwLjdjMC41LDAsMC45LTAuMSwxLjEtMC40QzEyNS43LDguMiwxMjUuOSw3LjgsMTI1LjksNy4zIE0xMjYsMTIuNQoJYzAtMC42LTAuMS0xLTAuMy0xLjNzLTAuNi0wLjQtMS4yLTAuNGgtMC44djRoMC44YzAuMywwLDAuNi0wLjEsMC44LTAuMmMwLjItMC4xLDAuMy0wLjMsMC40LTAuNXMwLjItMC40LDAuMi0wLjcKCUMxMjYsMTMuMSwxMjYsMTIuOCwxMjYsMTIuNSIvPgo8cG9seWxpbmUgY2xhc3M9InN0MCIgcG9pbnRzPSIxMzYuMiw4LjYgMTMzLjUsMTYuNiAxMzEuNiwxNi42IDEzMS42LDMuOCAxMzMuNSwzLjggMTMzLjUsMTEuOSAxMzMuNiwxMS45IDEzNi4zLDMuOCAxMzguMywzLjggCgkxMzguMywxNi42IDEzNi4zLDE2LjYgMTM2LjMsOC42IDEzNi4yLDguNiAiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTE0MS42LDE2LjZsMC43LTRjMC4xLTAuNCwwLjItMC44LDAuNC0xLjJzMC40LTAuNiwwLjgtMC44Yy0wLjYtMC4yLTEtMC42LTEuMi0xLjFTMTQyLDguNCwxNDIsNy43CgljMC0xLjMsMC4zLTIuMiwwLjktMi45YzAuNi0wLjYsMS41LTEsMi41LTFoM3YxMi43aC0ydi01LjRoLTAuNWMtMC40LDAtMC43LDAuMS0xLDAuNGMtMC4zLDAuMy0wLjUsMC43LTAuNiwxLjVsLTAuNiwzLjZIMTQxLjYKCSBNMTQ1LjYsNS42Yy0wLjYsMC0xLDAuMi0xLjMsMC41cy0wLjQsMC44LTAuNCwxLjRzMC4yLDEuMSwwLjUsMS4zczAuNywwLjQsMS4yLDAuNGgwLjhWNS42SDE0NS42TDE0NS42LDUuNnoiLz4KPHBvbHlsaW5lIGNsYXNzPSJzdDAiIHBvaW50cz0iMTAuNiwyNy4yIDcuMiwzNy4xIDQuOSwzNy4xIDQuOSwyMS4zIDcuMywyMS4zIDcuMywzMS4zIDcuNCwzMS4zIDEwLjcsMjEuMyAxMy4xLDIxLjMgMTMuMSwzNy4xIAoJMTAuNywzNy4xIDEwLjcsMjcuMiAxMC42LDI3LjIgIi8+Cjxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9IjI1LjMsMzcuMSAyNS4zLDMwLjIgMjIuNSwzMC4yIDIyLjUsMzcuMSAyMCwzNy4xIDIwLDIxLjMgMjIuNSwyMS4zIDIyLjUsMjcuOSAyNS4zLDI3LjkgMjUuMywyMS4zIAoJMjcuOCwyMS4zIDI3LjgsMzcuMSAyNS4zLDM3LjEgIi8+Cjxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9IjQwLjEsMzcuMSA0MC4xLDMwLjIgMzcuMiwzMC4yIDM3LjIsMzcuMSAzNC44LDM3LjEgMzQuOCwyMS4zIDM3LjIsMjEuMyAzNy4yLDI3LjkgNDAuMSwyNy45IAoJNDAuMSwyMS4zIDQyLjYsMjEuMyA0Mi42LDM3LjEgNDAuMSwzNy4xICIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTcuMiwzM2MwLDEuNC0wLjMsMi40LTAuOSwzLjFjLTAuNiwwLjctMS42LDEuMS0zLDEuMXMtMi4zLTAuMy0yLjktMWMtMC42LTAuNy0wLjktMS42LTAuOS0yLjl2LTgKCWMwLTAuNiwwLjEtMS4yLDAuMi0xLjdjMC4xLTAuNSwwLjQtMSwwLjctMS4zYzAuMy0wLjQsMC43LTAuNywxLjItMC44YzAuNS0wLjIsMS4xLTAuMywxLjgtMC4zczEuNCwwLjEsMS44LDAuMwoJYzAuNSwwLjIsMC45LDAuNSwxLjIsMC44YzAuMywwLjQsMC41LDAuOCwwLjcsMS4zYzAuMSwwLjUsMC4yLDEuMSwwLjIsMS44TDU3LjIsMzMgTTU0LjcsMjUuMWMwLTAuNC0wLjEtMC44LTAuMy0xLjIKCWMtMC4yLTAuNC0wLjYtMC41LTEuMS0wLjVjLTAuMywwLTAuNSwwLjEtMC43LDAuMnMtMC4zLDAuMy0wLjQsMC41Yy0wLjEsMC4yLTAuMiwwLjQtMC4yLDAuNnMtMC4xLDAuNC0wLjEsMC43djgKCWMwLDAuNCwwLjEsMC44LDAuMywxLjFzMC42LDAuNSwxLjEsMC41czAuOS0wLjIsMS4xLTAuNWMwLjItMC40LDAuMy0wLjgsMC4zLTEuMkw1NC43LDI1LjFMNTQuNywyNS4xeiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNjkuOCwyOC44YzAuNywwLjIsMS4yLDAuNywxLjUsMS4zYzAuMywwLjYsMC40LDEuNCwwLjQsMi4yYzAsMS43LTAuNCwyLjktMS4xLDMuNmMtMC43LDAuOC0xLjgsMS4yLTMuMywxLjIKCUg2NFYyMS4yaDMuNWMxLjQsMCwyLjQsMC40LDMuMSwxLjFzMSwxLjgsMSwzLjJjMCwwLjctMC4xLDEuNC0wLjQsMS45cy0wLjcsMS0xLjMsMS4yTDY5LjgsMjguOCBNNjkuMSwyNS42YzAtMC43LTAuMS0xLjMtMC40LTEuNgoJYy0wLjMtMC4zLTAuOC0wLjUtMS41LTAuNWgtMC44djQuMWgwLjhjMC43LDAsMS4xLTAuMiwxLjQtMC41QzY5LDI2LjcsNjkuMSwyNi4yLDY5LjEsMjUuNiBNNjkuMywzMi4xYzAtMC43LTAuMS0xLjMtMC40LTEuNwoJYy0wLjMtMC40LTAuOC0wLjUtMS41LTAuNWgtMC45djQuOWgxYzAuNCwwLDAuNy0wLjEsMS0wLjJjMC4yLTAuMSwwLjQtMC40LDAuNi0wLjZjMC4xLTAuMiwwLjItMC41LDAuMy0wLjgKCUM2OS4zLDMyLjgsNjkuMywzMi40LDY5LjMsMzIuMSIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNODQuMiwzNy4xbC0wLjYtMy4zaC0yLjljLTAuMSwwLjUtMC4yLDEuMS0wLjMsMS42Yy0wLjEsMC42LTAuMiwxLjEtMC4zLDEuN2gtMi41YzAuNS0yLjcsMS4xLTUuMywxLjYtNy45CglzMS4xLTUuMywxLjYtNy45aDIuOGwzLjMsMTUuOEg4NC4yIE04MiwyNC45Yy0wLjIsMS4xLTAuMywyLjItMC41LDMuM2MtMC4yLDEuMS0wLjQsMi4yLTAuNiwzLjNoMi4yTDgyLDI0LjkKCUM4Mi4xLDI0LjksODIsMjQuOSw4MiwyNC45eiIvPgo8cG9seWxpbmUgY2xhc3M9InN0MCIgcG9pbnRzPSIxMDAuNSwyMS4zIDEwMC41LDM0LjggMTAxLjUsMzQuOCAxMDEuNSw0MC4xIDk5LjQsNDAuMSA5OS40LDM3LjEgOTIuNywzNy4xIDkyLjcsMjEuMyA5NS4yLDIxLjMgCgk5NS4yLDM0LjggOTgsMzQuOCA5OCwyMS4zIDEwMC41LDIxLjMgIi8+Cjxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9IjExMy4yLDI3LjIgMTA5LjksMzcuMSAxMDcuNCwzNy4xIDEwNy40LDIxLjMgMTA5LjksMjEuMyAxMDkuOSwzMS4zIDExMCwzMS4zIDExMy4zLDIxLjMgMTE1LjcsMjEuMyAKCTExNS43LDM3LjEgMTEzLjMsMzcuMSAxMTMuMywyNy4yIDExMy4yLDI3LjIgIi8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMjIsMzcuMWwwLjktNWMwLjEtMC41LDAuMy0xLDAuNS0xLjVjMC4yLTAuNCwwLjYtMC44LDEtMWMtMC43LTAuMy0xLjItMC44LTEuNS0xLjRzLTAuNC0xLjQtMC40LTIuMgoJYzAtMS42LDAuNC0yLjcsMS4xLTMuNmMwLjgtMC44LDEuOC0xLjIsMy4xLTEuMmgzLjdWMzdoLTIuNXYtNi44aC0wLjdjLTAuNCwwLTAuOCwwLjItMS4yLDAuNWMtMC40LDAuMy0wLjYsMC45LTAuOCwxLjhsLTAuOCw0LjUKCUwxMjIsMzcuMSBNMTI2LjksMjMuNmMtMC43LDAtMS4zLDAuMi0xLjYsMC43Yy0wLjMsMC40LTAuNCwxLTAuNCwxLjhzMC4yLDEuMywwLjYsMS42YzAuNCwwLjMsMC45LDAuNCwxLjUsMC40aDF2LTQuNQoJQzEyNy45LDIzLjYsMTI2LjksMjMuNiwxMjYuOSwyMy42eiIvPgo8cG9seWxpbmUgY2xhc3M9InN0MCIgcG9pbnRzPSIxNDEuOSwzMy42IDE0MC44LDMwLjcgMTM5LjgsMjcuOSAxMzkuNywyNy45IDEzOS43LDM3LjEgMTM3LjIsMzcuMSAxMzcuMiwyMS4zIDEzOS42LDIxLjMgCgkxNDEuMywyNS44IDE0Mi42LDI5LjIgMTQyLjcsMjkuMiAxNDQsMjUuNyAxNDUuNywyMS4zIDE0OC4xLDIxLjMgMTQ4LjEsMzcuMSAxNDUuNiwzNy4xIDE0NS42LDI4IDE0NS42LDI4IDE0NC41LDMwLjggMTQzLjQsMzMuNiAKCTE0MS45LDMzLjYgIi8+CjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0xNDYuNyw0NS4xYzAuNS0wLjMsMS0wLjcsMS41LTFoMC4xbDAsMGwwLDBjLTIuOCwxLjMtNS42LDIuNC04LjMsMy41Yy0xNy4yLDYuNy0zMy4zLDkuNS00Ny40LDkuNgoJQzcyLjgsNTcuMyw1Ny4yLDUyLDQ4LjksNDRoLTE1QzU2LjQsNjUuMywxMDguOSw3MC4yLDE0Ni43LDQ1LjEiLz4KPHBhdGggY2xhc3M9InN0MiIgZD0iTTE5LjEsNDRINC45YzE5LDIwLjEsNDYuMiwyNy43LDY5LDI4LjdjMi40LDAuMSw0LjcsMC4xLDYuOSwwLjFjMTQuOC0wLjIsMzEuMy0zLjQsNDUuNi0xMS4xCgljOC4yLTQuNCwxNS43LTEwLjIsMjEuOC0xNy44bDAsMEMxMTMuNiw3Ny45LDQ0LjMsNzIsMTkuMSw0NCIvPgo8cGF0aCBjbGFzcz0ic3QzIiBkPSJNMTQ4LjIsNDRMMTQ4LjIsNDRMMTQ4LjIsNDRMMTQ4LjIsNDRjLTAuNiwwLjQtMS4xLDAuOC0xLjYsMS4xQzEwOC45LDcwLjIsNTYuNCw2NS4zLDMzLjksNDRIMTkuMQoJQzQ0LjMsNzIsMTEzLjYsNzcuOSwxNDguMiw0NEwxNDguMiw0NCIvPgo8cGF0aCBjbGFzcz0ic3Q0IiBkPSJNMTQ4LjYsNDMuOUwxNDguNiw0My45YzAtMC4xLTAuMS0wLjItMC4yLTAuMmMwLDAtMC4xLTAuMS0wLjItMC4xaC0wLjFIMTQ4aC0wLjFjLTIuOCwxLjItNS41LDIuNC04LjMsMy41CgljLTE1LjksNi4xLTMyLjIsOS40LTQ3LjIsOS41aC0wLjhjLTE4LjQsMC0zMy44LTQuNy00Mi4zLTEyLjlsLTAuMS0wLjFsLTAuMS0wLjFINDlINWMwLDAtMC4xLDAtMC4yLDAuMWwtMC4yLDAuMQoJYy0wLjEsMC4xLTAuMiwwLjItMC4xLDAuM3YwLjJjMCwwLDAsMC4xLDAuMSwwLjJjOC44LDkuMywyMCwxNi41LDMzLjIsMjEuNWMxMSw0LjIsMjMuNSw2LjYsMzYsNy4yYzEuNywwLjEsMy41LDAuMSw1LjMsMC4xCgljMC42LDAsMS4xLDAsMS43LDBjNy44LTAuMSwxNS42LTEsMjMuMS0yLjhjOC4yLTEuOSwxNS44LTQuNywyMi43LTguM2M4LjgtNC43LDE2LjEtMTAuNiwyMS45LTE3LjhsMCwwbDAsMHYtMC4xdi0wLjFWNDQKCUMxNDguNiw0NC4xLDE0OC42LDQ0LDE0OC42LDQzLjlMMTQ4LjYsNDMuOXogTTE0Nyw0NC45Yy01LjYsNi42LTEyLjYsMTIuMi0yMC44LDE2LjVjLTEyLjksNi44LTI5LDEwLjctNDUuNCwxMQoJYy0yLjMsMC00LjYsMC02LjktMC4xQzU3LjgsNzEuNiwyNy42LDY3LDUuNyw0NC40aDQzLjFjOC43LDguMywyNC4zLDEzLDQyLjgsMTNjMC4zLDAsMC41LDAsMC44LDBjMTUuMS0wLjEsMzEuNS0zLjQsNDcuNC05LjYKCUMxNDIuMyw0NywxNDQuNyw0NiwxNDcsNDQuOUwxNDcsNDQuOXoiLz4KPC9zdmc+Cg==" alt="Фонд содействия инновациям"></div>
     <div class="support-logo platform">
-      <img src="https://univertechpred.ru/local/templates/mo/assets/img/master/main_project-logo.svg" alt="Платформа университетского технологического предпринимательства" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <span class="platform-fallback"><strong>ПЛАТФОРМА</strong><br>университетского<br>технологического<br>предпринимательства</span>
+      <img src="assets/platform-logo.png" alt="Платформа университетского технологического предпринимательства">
     </div>
     <div class="support-divider" aria-hidden="true"></div>
     <p class="support-text">Проект реализован при поддержке Фонда содействия инновациям в рамках программы «Студенческий стартап» Платформы университетского технологического предпринимательства федерального проекта «Технологии», входящего в состав национального проекта «Эффективная и конкурентная экономика».</p>
@@ -251,6 +263,47 @@
     </div>
   </section>
 
+  <section class="content soft" id="examples">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">Примеры продукта</div><h2>Одна платформа — разные характеры</h2></div>
+        <p>Здесь будут реальные фотографии вариантов РОБКОНА. Они покажут, как одна базовая платформа меняется за счёт разных элементов внешнего оформления.</p>
+      </div>
+      <div class="product-gallery">
+        <figure class="product-shot">
+          <div class="product-photo">
+            <div class="photo-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m4 17 5-5 3 3 2-2 6 5"/></svg>
+              <strong>Фото варианта №1</strong>
+              <span>Позже заменим на реальную фотографию продукта</span>
+            </div>
+          </div>
+          <figcaption><h3>Вариант внешнего вида №1</h3><p>Место для фотографии и короткого описания особенностей конкретного корпуса.</p></figcaption>
+        </figure>
+        <figure class="product-shot">
+          <div class="product-photo">
+            <div class="photo-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m4 17 5-5 3 3 2-2 6 5"/></svg>
+              <strong>Фото варианта №2</strong>
+              <span>Позже заменим на реальную фотографию продукта</span>
+            </div>
+          </div>
+          <figcaption><h3>Вариант внешнего вида №2</h3><p>Место для фотографии и короткого описания особенностей конкретного корпуса.</p></figcaption>
+        </figure>
+        <figure class="product-shot">
+          <div class="product-photo">
+            <div class="photo-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m4 17 5-5 3 3 2-2 6 5"/></svg>
+              <strong>Фото варианта №3</strong>
+              <span>Позже заменим на реальную фотографию продукта</span>
+            </div>
+          </div>
+          <figcaption><h3>Вариант внешнего вида №3</h3><p>Место для фотографии и короткого описания особенностей конкретного корпуса.</p></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <section class="content soft" id="inside">
     <div class="wrap">
       <div class="section-head">
@@ -294,7 +347,7 @@
       <div class="copy">
         <div class="kicker">О компании</div>
         <h2>РОБКОН создаёт персональные роботы-конструкторы</h2>
-        <p>ООО «РОБКОН» разрабатывает подвижные роботы-конструкторы с дистанционным управлением и сменным внешним дизайном. Одна базовая платформа сохраняется, а внешний корпус можно менять под новую идею.</p>
+        <p>ООО РОБКОН разрабатывает подвижные роботы-конструкторы с дистанционным управлением и сменным внешним дизайном. Одна базовая платформа сохраняется, а внешний корпус можно менять под новую идею.</p>
       </div>
       <div class="cards" style="grid-template-columns:1fr 1fr">
         <article class="card"><div class="card-icon">01</div><h3>Дом</h3><p>Сборка, управление и смена внешнего образа робота.</p></article>
@@ -308,7 +361,7 @@
       <div class="request-copy">
         <div class="kicker">Заявка</div>
         <h2>Расскажите, каким должен быть ваш РОБКОН</h2>
-        <p>Оставьте контакт и коротко опишите желаемый внешний вид. Оставьте контакт и коротко опишите желаемый внешний вид. Заявка будет подготовлена для отправки в ООО «РОБКОН».</p>
+        <p>Оставьте контакт и коротко опишите желаемый внешний вид. Заявка будет подготовлена для отправки в ООО РОБКОН.</p>
         <div class="contact">Email компании: <a href="mailto:kamilazatovich12@gmail.com">kamilazatovich12@gmail.com</a></div>
       </div>
       <form class="form-card" id="requestForm">
@@ -327,7 +380,7 @@
 
 <footer>
   <div class="wrap footer-row">
-    <span><strong>ООО «РОБКОН»</strong> · персональные роботы-конструкторы</span>
+    <span><strong>ООО РОБКОН</strong> · персональные роботы-конструкторы</span>
     <span>Подвижная платформа · сменный дизайн · дистанционное управление</span>
   </div>
 </footer>
