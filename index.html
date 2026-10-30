@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>РОБКОН — персональный робот-конструктор</title>
+  <meta name="description" content="РОБКОН — подвижный робот-конструктор с дистанционным управлением и сменным внешним дизайном.">
+  <style>
+    :root{
+      --ink:#111c31;
+      --muted:#5d6b82;
+      --line:#dfe5ed;
+      --soft:#f2f6fa;
+      --accent:#5a54e8;
+      --accent-dark:#4841cf;
+      --cyan:#19bfe5;
+      --white:#fff;
+      --radius:20px;
+      --shadow:0 18px 50px rgba(27,39,68,.10);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.55}
+    a{color:inherit;text-decoration:none}
+    img,svg{display:block;max-width:100%}
+    button,input,textarea,select{font:inherit}
+    .wrap{width:min(1200px,calc(100% - 48px));margin-inline:auto}
+
+    /* Header */
+    .site-header{background:#fff;border-bottom:1px solid var(--line);position:relative;z-index:20}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:max-content}
+    .brand-mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--cyan));color:#fff;font-weight:900;font-size:19px;box-shadow:0 8px 22px rgba(90,84,232,.20)}
+    .brand-copy strong{display:block;font-size:19px;line-height:1.15;letter-spacing:.03em}
+    .brand-copy small{display:block;margin-top:4px;color:var(--muted);font-size:11px}
+    .nav-links{display:flex;align-items:center;gap:29px;font-size:14px;font-weight:700}
+    .nav-links>a:not(.btn):hover{color:var(--accent)}
+    .mobile-btn{display:none;border:0;background:transparent;padding:10px;color:var(--ink);cursor:pointer}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:#fff;font-weight:800;font-size:14px;cursor:pointer;transition:.16s ease}
+    .btn:hover{background:var(--accent-dark);border-color:var(--accent-dark);transform:translateY(-1px)}
+    .btn.secondary{background:#fff;color:var(--ink);border-color:#cfd7e2}
+    .btn.secondary:hover{background:#f7f8fb;border-color:#bac5d2}
+
+    /* Mandatory grant block: kept inside the first screen */
+    .support-band{background:var(--soft);border-bottom:1px solid #e6edf3}
+    .support-inner{min-height:126px;display:grid;grid-template-columns:170px 205px 1px minmax(0,1fr);gap:22px;align-items:center}
+    .support-logo{display:flex;align-items:center;justify-content:flex-start;min-width:0}
+    .support-logo img{max-width:100%;max-height:74px;width:auto;height:auto;object-fit:contain}
+    .support-logo.platform img{max-height:62px}
+    .support-divider{height:54px;background:#bdc9d5}
+    .support-text{margin:0;color:#51627a;font-size:12.5px;line-height:1.55;max-width:760px}
+    .platform-fallback{display:none;font-size:10px;line-height:1.2;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#532ea8;max-width:190px}
+
+    /* Hero */
+    .hero{min-height:585px;display:flex;align-items:center;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;align-items:center;padding:58px 0 64px}
+    .eyebrow{display:block;color:#59677d;font-size:11px;font-weight:900;letter-spacing:.17em;text-transform:uppercase;margin-bottom:18px}
+    .eyebrow:after{content:"";display:block;width:50px;height:2px;background:linear-gradient(90deg,var(--accent),var(--cyan));margin-top:12px}
+    h1{font-size:clamp(42px,5vw,66px);line-height:1.02;letter-spacing:-.045em;margin:0;max-width:700px}
+    .hero-lead{margin:24px 0 0;color:var(--muted);font-size:18px;line-height:1.62;max-width:600px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .hero-note{margin-top:18px;color:#78869a;font-size:12px;max-width:540px}
+    .hero-art{position:relative;min-width:0}
+    .hero-art:before{content:"";position:absolute;inset:8% 5% 4%;border-radius:50%;background:radial-gradient(circle,rgba(90,84,232,.12),rgba(25,191,229,.04) 57%,transparent 72%);filter:blur(2px)}
+    .hero-art img{position:relative;width:100%;max-height:490px;object-fit:contain;filter:drop-shadow(0 28px 28px rgba(22,34,63,.10))}
+    .hero-caption{position:absolute;right:6%;bottom:2%;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:12px;padding:11px 14px;box-shadow:var(--shadow);font-size:12px;color:var(--muted)}
+    .hero-caption strong{display:block;color:var(--ink);font-size:13px;margin-bottom:2px}
+
+    /* General sections */
+    section.content{padding:88px 0}
+    .section-head{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:end;margin-bottom:38px}
+    .kicker{font-size:11px;color:var(--accent);font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+    h2{font-size:clamp(32px,4vw,48px);line-height:1.08;letter-spacing:-.035em;margin:0}
+    .section-head p,.copy>p{margin:0;color:var(--muted);font-size:17px;line-height:1.65;max-width:62ch}
+    .soft{background:#f6f8fb}
+
+    /* Steps */
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;min-height:235px}
+    .step-no{color:var(--accent);font-weight:900;font-size:12px;letter-spacing:.08em}
+    .step h3{font-size:20px;margin:24px 0 10px}
+    .step p{margin:0;color:var(--muted);font-size:14px;line-height:1.58}
+    .step-icon{width:48px;height:48px;margin-top:24px;border-radius:14px;background:#eeedff;color:var(--accent);display:grid;place-items:center;font-weight:900}
+
+    /* Value split */
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:66px;align-items:center}
+    .copy h2{margin-bottom:22px}
+    .benefit-list{display:grid;gap:16px;margin-top:28px}
+    .benefit{display:grid;grid-template-columns:28px 1fr;gap:13px;align-items:start}
+    .check{width:28px;height:28px;border-radius:9px;background:#eeedff;color:var(--accent);display:grid;place-items:center;font-weight:900}
+    .benefit b{display:block;margin-bottom:3px;font-size:15px}
+    .benefit span{display:block;color:var(--muted);font-size:14px;line-height:1.5}
+    .visual-card{min-height:440px;border-radius:26px;background:linear-gradient(145deg,#111a32,#212c57);color:#fff;position:relative;overflow:hidden;padding:30px;box-shadow:var(--shadow)}
+    .visual-card:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;right:-110px;top:-105px;background:radial-gradient(circle,rgba(25,191,229,.40),transparent 68%)}
+    .platform{position:absolute;left:11%;right:11%;bottom:62px;height:110px;border:2px solid #8394ff;border-radius:28px;background:rgba(255,255,255,.07);transform:perspective(700px) rotateX(58deg);box-shadow:0 34px 60px rgba(0,0,0,.25)}
+    .shell{position:absolute;left:19%;right:19%;height:130px;border:2px solid rgba(255,255,255,.42);border-radius:34px;background:rgba(255,255,255,.04);transform:perspective(700px) rotateX(58deg)}
+    .shell.s1{bottom:148px}.shell.s2{bottom:230px;border-color:#31c5e7}.shell.s3{bottom:312px;border-color:#887fff}
+    .visual-label{position:absolute;left:30px;bottom:27px;color:#cad4ef;font-size:12px}
+
+    /* What is inside */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{border:1px solid var(--line);border-radius:18px;padding:25px;background:#fff}
+    .card-icon{width:46px;height:46px;border-radius:14px;background:#f0efff;color:var(--accent);display:grid;place-items:center;font-weight:900;margin-bottom:18px}
+    .card h3{margin:0 0 8px;font-size:18px}
+    .card p{margin:0;color:var(--muted);font-size:14px;line-height:1.58}
+
+    /* Audience */
+    .audience{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .audience-card{border:1px solid var(--line);border-radius:22px;padding:30px;background:#fff;position:relative;overflow:hidden}
+    .audience-card h3{font-size:27px;margin:5px 0 10px}
+    .audience-card p{margin:0;color:var(--muted);max-width:52ch}
+    .audience-card ul{margin:22px 0 0;padding-left:19px;color:#34435c}
+    .audience-card li{margin:8px 0;font-size:14px}
+    .aud-tag{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+
+    /* Request form */
+    .request{background:#111a32;color:#fff}
+    .request-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:54px;align-items:start}
+    .request .kicker{color:#76e1ff}
+    .request h2{margin-bottom:18px}
+    .request-copy p{color:#bac5dd;font-size:16px;line-height:1.65;max-width:48ch}
+    .request-copy .contact{margin-top:26px;font-size:14px;color:#d7dded}
+    .request-copy .contact a{color:#8ae5ff;text-decoration:underline;text-underline-offset:3px}
+    .form-card{background:#fff;color:var(--ink);border-radius:22px;padding:28px;box-shadow:0 24px 60px rgba(0,0,0,.20)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .field{display:grid;gap:7px}.field.full{grid-column:1/-1}
+    .field label{font-size:12px;font-weight:800;color:#45536a}
+    .field input,.field select,.field textarea{width:100%;border:1px solid #d6dde7;border-radius:10px;padding:13px 14px;color:var(--ink);background:#fff;outline:none}
+    .field textarea{min-height:116px;resize:vertical}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(90,84,232,.10)}
+    .form-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:18px}
+    .form-note{font-size:11px;color:#758198;max-width:430px}
+    .form-status{display:none;margin-top:14px;padding:12px 14px;border-radius:10px;background:#eef9fc;color:#225467;font-size:13px}
+
+    /* Footer */
+    footer{border-top:1px solid var(--line);padding:28px 0 32px;color:#66738a;font-size:12px}
+    .footer-row{display:flex;justify-content:space-between;gap:24px;align-items:center;flex-wrap:wrap}
+    .footer-row strong{color:var(--ink)}
+
+    @media(max-width:980px){
+      .nav-links{display:none;position:absolute;left:24px;right:24px;top:70px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);flex-direction:column;align-items:stretch;gap:10px}
+      .nav-links.open{display:flex}.nav-links .btn{width:100%}.mobile-btn{display:block}
+      .support-inner{grid-template-columns:140px 170px 1px minmax(0,1fr);gap:16px}
+      .hero-grid,.split,.request-grid{grid-template-columns:1fr;gap:36px}
+      .hero{min-height:auto}.hero-grid{padding-top:48px}.hero-art{max-width:720px;margin-inline:auto}
+      .section-head{grid-template-columns:1fr;gap:16px}.steps{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:700px){
+      .wrap{width:min(100% - 32px,1200px)}
+      .nav{height:70px}.brand-copy small{display:none}
+      .support-inner{padding:20px 0;grid-template-columns:1fr 1fr;gap:18px}
+      .support-divider{display:none}.support-text{grid-column:1/-1;font-size:11.5px}
+      .support-logo img{max-height:58px}.support-logo.platform img{max-height:48px}
+      .hero-grid{padding:40px 0 50px;gap:28px}h1{font-size:42px}.hero-lead{font-size:17px}.hero-caption{display:none}
+      section.content{padding:66px 0}.steps,.cards,.audience,.form-grid{grid-template-columns:1fr}
+      .field.full{grid-column:auto}.visual-card{min-height:390px}.request-grid{gap:30px}.form-card{padding:20px}
+    }
+  </style>
+</head>
+<body id="top">
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="РОБКОН — на главную">
+      <span class="brand-mark">R</span>
+      <span class="brand-copy"><strong>РОБКОН</strong><small>Персональный робот-конструктор</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Основная навигация">
+      <a href="#how">Как это работает</a>
+      <a href="#advantages">Возможности</a>
+      <a href="#audience">Для кого</a>
+      <a href="#project">О проекте</a>
+      <a class="btn" href="#request">Оставить заявку</a>
+    </nav>
+    <button class="mobile-btn" id="mobileBtn" type="button" aria-label="Открыть меню">☰</button>
+  </div>
+</header>
+
+<div class="support-band" aria-label="Информация о поддержке проекта">
+  <div class="wrap support-inner">
+    <div class="support-logo"><img src="assets/fasie.svg" alt="Фонд содействия инновациям"></div>
+    <div class="support-logo platform">
+      <img src="https://univertechpred.ru/local/templates/mo/assets/img/master/main_project-logo.svg" alt="Платформа университетского технологического предпринимательства" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="platform-fallback">Платформа университетского технологического предпринимательства</span>
+    </div>
+    <div class="support-divider" aria-hidden="true"></div>
+    <p class="support-text">Проект реализован при поддержке Фонда содействия инновациям в рамках программы «Студенческий стартап» Платформы университетского технологического предпринимательства федерального проекта «Технологии», входящего в состав национального проекта «Эффективная и конкурентная экономика».</p>
+  </div>
+</div>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Персональный робот-конструктор</span>
+        <h1 id="hero-title">Придумайте робота, которого больше ни у кого нет</h1>
+        <p class="hero-lead">Вы задаёте внешний вид, а РОБКОН превращает идею в подвижный робот-конструктор: с деталями для сборки, сменным корпусом и дистанционным управлением.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#request">Оставить заявку</a>
+          <a class="btn secondary" href="#how">Как это работает</a>
+        </div>
+        <p class="hero-note">Продукт разрабатывается для домашнего использования, а также для кружков, школ и технопарков.</p>
+      </div>
+      <div class="hero-art">
+        <img src="assets/robocon-hero.svg" alt="Концепт подвижного робота-конструктора РОБКОН">
+        <div class="hero-caption"><strong>Одна платформа — разные образы</strong>Сменные элементы внешнего дизайна</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content soft" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">Как это работает</div><h2>От идеи до своего робота</h2></div>
+        <p>Ценность РОБКОНА — не в готовом внешнем виде, а в возможности создать собственный образ и собрать его на единой подвижной платформе.</p>
+      </div>
+      <div class="steps">
+        <article class="step"><div class="step-no">ШАГ 01</div><div class="step-icon">✎</div><h3>Задайте идею</h3><p>Опишите желаемый образ робота текстом или используйте изображение или эскиз как основу.</p></article>
+        <article class="step"><div class="step-no">ШАГ 02</div><div class="step-icon">3D</div><h3>Получите дизайн</h3><p>Внешний корпус адаптируется под геометрию базовой робототехнической платформы.</p></article>
+        <article class="step"><div class="step-no">ШАГ 03</div><div class="step-icon">▦</div><h3>Соберите</h3><p>Корпус превращается в комплект деталей, рассчитанных на понятную последовательную сборку.</p></article>
+        <article class="step"><div class="step-no">ШАГ 04</div><div class="step-icon">◉</div><h3>Запустите</h3><p>Готовый робот устанавливается на колесную платформу и управляется дистанционно.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="content" id="advantages">
+    <div class="wrap split">
+      <div class="copy">
+        <div class="kicker">Главное отличие</div>
+        <h2>Один робот. Много вариантов внешнего вида.</h2>
+        <p>Базовая робототехническая часть остаётся неизменной. Меняется внешний корпус — поэтому новый образ не требует заново покупать электронику и ходовую платформу.</p>
+        <div class="benefit-list">
+          <div class="benefit"><div class="check">✓</div><div><b>Персональный внешний вид</b><span>Не только готовые варианты: дизайн формируется вокруг идеи пользователя.</span></div></div>
+          <div class="benefit"><div class="check">✓</div><div><b>Сменные детали корпуса</b><span>Отдельные элементы внешнего оформления можно заменять без изменения базовой платформы.</span></div></div>
+          <div class="benefit"><div class="check">✓</div><div><b>Подвижная модель</b><span>РОБКОН — не статическая модель: конструкция предусматривает колесную платформу и дистанционное управление.</span></div></div>
+        </div>
+      </div>
+      <div class="visual-card" aria-label="Схема модульной архитектуры РОБКОН">
+        <div class="kicker" style="color:#76e1ff">Модульная конструкция</div>
+        <h3 style="margin:0;font-size:26px">Оболочка меняется — платформа остаётся</h3>
+        <div class="shell s3"></div><div class="shell s2"></div><div class="shell s1"></div><div class="platform"></div>
+        <div class="visual-label">Схематичное представление принципа сменного корпуса</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content soft" id="inside">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">Что получает пользователь</div><h2>Набор для сборки и запуска</h2></div>
+        <p>Сайт показывает только те элементы продукта, которые закреплены в материалах проекта. Параметры скорости, автономности и дальности управления пока не заявляются.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="card-icon">▰</div><h3>Колёсная платформа</h3><p>Единая база для установки разных вариантов внешнего оформления.</p></article>
+        <article class="card"><div class="card-icon">⌁</div><h3>Модуль управления</h3><p>Электронная часть обеспечивает работу подвижной робототехнической платформы.</p></article>
+        <article class="card"><div class="card-icon">⌁</div><h3>Пульт управления</h3><p>Конструкция предусматривает дистанционное управление готовой моделью.</p></article>
+        <article class="card"><div class="card-icon">3D</div><h3>Детали корпуса</h3><p>Сменные элементы внешнего дизайна изготавливаются преимущественно методом 3D-печати.</p></article>
+        <article class="card"><div class="card-icon">↻</div><h3>Несколько образов</h3><p>Проект предусматривает возможность использовать несколько вариантов внешнего оформления на одной платформе.</p></article>
+        <article class="card"><div class="card-icon">✓</div><h3>Понятная сборка</h3><p>Комплект ориентирован на воспроизводимую сборку с подготовленными деталями и инструкцией.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="content" id="audience">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">Для кого</div><h2>Для дома и технического творчества</h2></div>
+        <p>У проекта два основных сценария: персональный робот-конструктор для семьи и учебный набор для практических занятий.</p>
+      </div>
+      <div class="audience">
+        <article class="audience-card">
+          <div class="aud-tag">Для семьи</div><h3>Собрать робота со своим характером</h3>
+          <p>Для детей школьного возраста, родителей и любителей конструкторов, которым важны собственный дизайн, процесс сборки и управляемая модель.</p>
+          <ul><li>персонализированный внешний вид;</li><li>сборка своими руками;</li><li>смена элементов корпуса;</li><li>дистанционное управление.</li></ul>
+        </article>
+        <article class="audience-card">
+          <div class="aud-tag">Для образования</div><h3>Пройти путь от идеи до работающей модели</h3>
+          <p>Для кружков, школ, технопарков и центров технического творчества — как практический набор для робототехники, инженерного дизайна и проектной работы.</p>
+          <ul><li>робототехника;</li><li>инженерный дизайн;</li><li>3D-моделирование и изготовление;</li><li>проектная деятельность.</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="content soft" id="project">
+    <div class="wrap split">
+      <div class="copy">
+        <div class="kicker">О проекте</div>
+        <h2>РОБКОН соединяет конструктор и персонализацию</h2>
+        <p>Проект направлен на создание подвижной робототехнической игрушки-конструктора с дистанционным управлением и сменными элементами внешнего дизайна. Базовая платформа сохраняется, а внешний облик можно менять.</p>
+      </div>
+      <div class="cards" style="grid-template-columns:1fr 1fr">
+        <article class="card"><div class="card-icon">01</div><h3>Дом</h3><p>Сборка, управление и смена внешнего образа робота.</p></article>
+        <article class="card"><div class="card-icon">02</div><h3>Образование</h3><p>Практический цикл от идеи и дизайна до сборки и запуска модели.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="content request" id="request">
+    <div class="wrap request-grid">
+      <div class="request-copy">
+        <div class="kicker">Заявка</div>
+        <h2>Расскажите, каким должен быть ваш РОБКОН</h2>
+        <p>Оставьте контакт и коротко опишите желаемый внешний вид. Форма сформирует письмо для ООО «РОБКОН» и откроет его в вашем почтовом приложении.</p>
+        <div class="contact">Email проекта: <a href="mailto:kamilazatovich12@gmail.com">kamilazatovich12@gmail.com</a></div>
+      </div>
+      <form class="form-card" id="requestForm">
+        <div class="form-grid">
+          <div class="field"><label for="name">Ваше имя *</label><input id="name" name="name" required autocomplete="name"></div>
+          <div class="field"><label for="contact">Телефон или email *</label><input id="contact" name="contact" required autocomplete="email"></div>
+          <div class="field full"><label for="type">Для кого нужен робот?</label><select id="type" name="type"><option>Для ребёнка / семьи</option><option>В подарок</option><option>Для себя</option><option>Для школы или кружка</option><option>Другое</option></select></div>
+          <div class="field full"><label for="idea">Каким вы хотите видеть робота? *</label><textarea id="idea" name="idea" required placeholder="Например: компактный робот-исследователь в космическом стиле"></textarea></div>
+        </div>
+        <div class="form-actions"><button class="btn" type="submit">Отправить заявку</button><span class="form-note">Нажатие откроет почтовое приложение с уже заполненным текстом заявки.</span></div>
+        <div class="form-status" id="formStatus">Письмо подготовлено. Если почтовое приложение не открылось, отправьте заявку вручную на адрес проекта.</div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span><strong>ООО «РОБКОН»</strong> · проект № 114986</span>
+    <span>Создание подвижной робототехнической игрушки-конструктора с серийной персонализацией внешнего дизайна</span>
+  </div>
+</footer>
+
+<script>
+  const mobileBtn = document.getElementById('mobileBtn');
+  const navLinks = document.getElementById('navLinks');
+  mobileBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  const requestForm = document.getElementById('requestForm');
+  requestForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const contact = document.getElementById('contact').value.trim();
+    const type = document.getElementById('type').value;
+    const idea = document.getElementById('idea').value.trim();
+    const subject = encodeURIComponent('Заявка с сайта РОБКОН — ' + name);
+    const body = encodeURIComponent(
+      'Имя: ' + name + '\n' +
+      'Контакт: ' + contact + '\n' +
+      'Для кого нужен робот: ' + type + '\n\n' +
+      'Пожелания по внешнему виду:\n' + idea
+    );
+    document.getElementById('formStatus').style.display = 'block';
+    window.location.href = 'mailto:kamilazatovich12@gmail.com?subject=' + subject + '&body=' + body;
+  });
+</script>
+</body>
+</html>
